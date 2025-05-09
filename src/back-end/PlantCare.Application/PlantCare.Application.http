@@ -1,0 +1,6 @@
+@PlantCare.Application_HostAddress = http://localhost:5225
+
+GET {{PlantCare.Application_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

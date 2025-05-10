@@ -9,8 +9,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc5367d7-ffc1-4adb-aad0-15f28c9dac9b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PlantCare.Application/PlantCare.Application.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PlantCare.Domain/PlantCare.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PlantCare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PlantCare/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Application/obj/Debug/net9.0/PlantCare.Application.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Application/obj/Debug/net9.0/PlantCare.Application.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Application/obj/Debug/net9.0/PlantCare.Application.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Application/obj/Debug/net9.0/PlantCare.Application.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Application/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Application/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Application/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Application/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/Debug/net9.0/PlantCare.Infra.CrossCutting.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/Debug/net9.0/PlantCare.Infra.CrossCutting.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/Debug/net9.0/PlantCare.Infra.CrossCutting.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/Debug/net9.0/PlantCare.Infra.CrossCutting.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/Debug/net9.0/PlantCare.Infra.Data.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/Debug/net9.0/PlantCare.Infra.Data.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/Debug/net9.0/PlantCare.Infra.Data.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/Debug/net9.0/PlantCare.Infra.Data.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Service/obj/Debug/net9.0/PlantCare.Service.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Service/obj/Debug/net9.0/PlantCare.Service.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Service/obj/Debug/net9.0/PlantCare.Service.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Service/obj/Debug/net9.0/PlantCare.Service.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Service/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Service/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Service/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Service/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,44 +39,44 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "caetanobona"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;caetanobona&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/caetanobona/plant-care.git",
-    "accountId": "bd3e9ca8-c986-454a-81a4-5c000c235437"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/caetanobona/plant-care.git&quot;,
+    &quot;accountId&quot;: &quot;bd3e9ca8-c986-454a-81a4-5c000c235437&quot;
   }
-}]]></component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2wv4czdywnmsKdSSGTj0uyrfTYC" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.PlantCare.Application: http">
     <configuration name="PlantCare.Application: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/PlantCare.Application/PlantCare.Application.csproj" />
@@ -98,6 +117,7 @@
       <option name="presentableId" value="Default" />
       <updated>1746908797278</updated>
       <workItem from="1746908798453" duration="642000" />
+      <workItem from="1746913564500" duration="607000" />
     </task>
     <servers />
   </component>

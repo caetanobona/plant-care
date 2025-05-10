@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlantCare.Infra.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26ef9c230e998aa9f57c276d44f2c7f2c2f82550")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4670eed54436e3a213f93a8c2ab56288a2c1b5d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlantCare.Infra.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlantCare.Infra.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

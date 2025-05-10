@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "m207hDY8Yvs=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Caetano\\Desktop\\code\\! PlantCare\\src\\back-end\\PlantCare.Domain\\PlantCare.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Caetano\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

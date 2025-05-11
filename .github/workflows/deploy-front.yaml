@@ -1,6 +1,9 @@
 name: deploy plantcare frontend to gh
 on: 
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs: 
   build:

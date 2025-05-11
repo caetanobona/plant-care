@@ -38,4 +38,7 @@ jobs:
         run: npm run build
       - name: deploy
         working-directory: src/front-end
-        run: npx gh-pages -d dist
+        run: |
+          git config --global user.email "caetano.bona@gmail.com"
+          git config --global user.name "Caetano de Medeiros Bona"
+          npx gh-pages -d dist

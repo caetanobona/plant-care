@@ -1,13 +1,51 @@
 name: deploy plantcare frontend to gh
 on: 
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
-jobs:
-  say-hello:
-    runs-on: ubuntu-latest
+jobs: 
+  build:
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Say Hello
-        run: echo "Hello, World!"
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/deploy-frontend
+      - name: install nodejs
+        uses: actions/setup-node@v4 
+        with:
+          node-version: 22.14.0
+      - name: install dependencies
+        working-directory: src/front-end
+        run: npm ci
+      - name: build
+        working-directory: src/front-end
+        run: npm run build
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/deploy-frontend
+      - name: install nodejs
+        uses: actions/setup-node@v4 
+        with:
+          node-version: 22.14.0
+      - name: install dependencies
+        working-directory: src/front-end
+        run: npm ci
+      - name: build
+        working-directory: src/front-end
+        run: npm run build
+      - name: deploy
+        working-directory: src/front-end
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git config --global user.email "caetano.bona@gmail.com"
+          git config --global user.name "caetanobona"
+          npm run deploy
+        env:
+          CI: true
+          GH_TOKEN: ${{secrets.DEPLOY_TOKEN}}  

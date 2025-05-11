@@ -14,6 +14,9 @@ jobs:
         with:
           node-version: 22.14.0
       - name: install dependencies
-        run: npm ci
+        run: | 
+          cd src/front-end
+          npm ci
       - name: build
+        working-directory: src/front-end
         run: npm run build

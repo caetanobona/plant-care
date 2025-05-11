@@ -40,5 +40,5 @@ jobs:
         working-directory: src/front-end
         run: |
           git config --global user.email "caetano.bona@gmail.com"
-          git config --global user.name "Caetano de Medeiros Bona"
+          git config --global user.name "caetanobona"
           npx gh-pages -d dist

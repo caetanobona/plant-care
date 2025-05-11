@@ -13,23 +13,20 @@
       <change beforePath="$PROJECT_DIR$/PlantCare.Application/obj/Debug/net9.0/PlantCare.Application.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Application/obj/Debug/net9.0/PlantCare.Application.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Application/obj/Debug/net9.0/PlantCare.Application.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Application/obj/Debug/net9.0/PlantCare.Application.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Application/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Application/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Application/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Application/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/PlantCare.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/PlantCare.Domain.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/Debug/net9.0/PlantCare.Infra.CrossCutting.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/Debug/net9.0/PlantCare.Infra.CrossCutting.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/Debug/net9.0/PlantCare.Infra.CrossCutting.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/Debug/net9.0/PlantCare.Infra.CrossCutting.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.CrossCutting/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/Debug/net9.0/PlantCare.Infra.Data.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/Debug/net9.0/PlantCare.Infra.Data.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/Debug/net9.0/PlantCare.Infra.Data.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/Debug/net9.0/PlantCare.Infra.Data.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra.Data/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Service/obj/Debug/net9.0/PlantCare.Service.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Service/obj/Debug/net9.0/PlantCare.Service.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Service/obj/Debug/net9.0/PlantCare.Service.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Service/obj/Debug/net9.0/PlantCare.Service.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Service/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Service/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Service/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Service/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +114,9 @@
       <option name="presentableId" value="Default" />
       <updated>1746908797278</updated>
       <workItem from="1746908798453" duration="642000" />
-      <workItem from="1746913564500" duration="607000" />
+      <workItem from="1746913564500" duration="680000" />
+      <workItem from="1746914259205" duration="710000" />
+      <workItem from="1746916734442" duration="2521000" />
     </task>
     <servers />
   </component>

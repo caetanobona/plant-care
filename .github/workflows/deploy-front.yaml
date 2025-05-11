@@ -4,7 +4,7 @@ on:
 
 jobs: 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,3 +19,23 @@ jobs:
       - name: build
         working-directory: src/front-end
         run: npm run build
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/deploy-frontend
+      - name: install nodejs
+        uses: actions/setup-node@v4 
+        with:
+          node-version: 22.14.0
+      - name: install dependencies
+        working-directory: src/front-end
+        run: npm ci
+      - name: build
+        working-directory: src/front-end
+        run: npm run build
+      - name: deploy
+        working-directory: src/front-end
+        run: gh-pages -d dist

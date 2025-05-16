@@ -1,0 +1,24 @@
+name: build plantcare frontend
+on: 
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs: 
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/build-frontend
+      - name: install nodejs
+        uses: actions/setup-node@v4 
+        with:
+          node-version: 22.14.0
+      - name: install dependencies
+        working-directory: src/front-end
+        run: npm ci
+      - name: build
+        working-directory: src/front-end
+        run: npm run build

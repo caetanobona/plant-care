@@ -3,7 +3,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 export const Route = createRootRoute({
   component: () => (
-    <div>
+    <div className='min-h-screen flex flex-col'>
       <Outlet />
       <TanStackRouterDevtools />
     </div>

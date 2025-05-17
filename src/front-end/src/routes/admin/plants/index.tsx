@@ -25,72 +25,94 @@ export const tableColumns: ColumnDef<Plant>[] = [
   }
 ]
 
-type Plant = {
+export type Plant = {
   name: string
+  room: string
   species: string
   wateringInterval: number
+  nextWatering: string
   isActive: boolean
 }
 
-const plantsMock : Plant[] = [
+export const plantsMock : Plant[] = [
   {  
     name: "Aloe Vera",  
+    room: "Bedroom",
     species: "Aloe barbadensis",  
-    wateringInterval: 14,  
+    wateringInterval: 14,
+    nextWatering: "Tomorrow",
     isActive: true  
   },  
   {  
     name: "Snake Plant",  
+    room: "Bedroom",
     species: "Sansevieria trifasciata",  
     wateringInterval: 10,  
+    nextWatering: "Tomorrow",
     isActive: true  
   },  
   {  
     name: "Peace Lily",  
+    room: "Bedroom",
     species: "Spathiphyllum wallisii",  
     wateringInterval: 7,  
+    nextWatering: "Today",
     isActive: false  
   },  
   {  
     name: "Spider Plant",  
+    room: "Bedroom",
     species: "Chlorophytum comosum",  
     wateringInterval: 5,  
+    nextWatering: "Tomorrow",
     isActive: true  
   },  
   {  
     name: "Fiddle Leaf Fig",  
+    room: "Bedroom",
     species: "Ficus lyrata",  
     wateringInterval: 8,  
+    nextWatering: "Tomorrow",
     isActive: true  
   },  
   {  
     name: "Pothos",  
+    room: "Bedroom",
     species: "Epipremnum aureum",  
     wateringInterval: 6,  
+    nextWatering: "Today",
     isActive: false  
   },  
   {  
     name: "Rubber Plant",  
+    room: "Bedroom",
     species: "Ficus elastica",  
     wateringInterval: 9,  
+    nextWatering: "Tomorrow",
     isActive: true  
   },  
   {  
     name: "Jade Plant",  
+    room: "Bedroom",
     species: "Crassula ovata",  
-    wateringInterval: 12,  
+    wateringInterval: 12,
+    nextWatering: "Tomorrow",  
     isActive: true  
   },  
   {  
     name: "Boston Fern",  
+    room: "Bedroom",
     species: "Nephrolepis exaltata",  
-    wateringInterval: 4,  
+    wateringInterval: 4,
+    nextWatering: "Next Week",  
     isActive: false  
   },  
   {  
-    name: "ZZ Plant",  
+    name: "ZaZa Plant",  
+    room: "Bedroom",
     species: "Zamioculcas zamiifolia",  
-    wateringInterval: 15,  
+    wateringInterval: 15,
+    nextWatering: "Tomorrow",  
     isActive: true  
   }
 ]

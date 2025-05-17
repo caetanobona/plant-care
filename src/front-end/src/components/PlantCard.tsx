@@ -20,10 +20,10 @@ const PlantCard = ({name, room, nextWatering} : PlantCardProps) => {
           ...
         </Button>
         <Button
-          className="absolute bottom-1 right-1 px-2 py-1 text-gray-50"
+          className="absolute bottom-1 right-1 text-gray-50"
         >
-          <Droplets className="w-3 h-3 "/>
-          <span className="p-0 m-0">Water</span>
+          <Droplets className="w-2 h-2 p-0"/>
+          <span className="p-0 m-0 text-xs">Water</span>
         </Button>
       </div>
       <div className="pl-4 pb-2 pt-2">

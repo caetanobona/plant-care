@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as DashboardDashboardImport } from './routes/_dashboard/_dashboard'
 import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
@@ -21,6 +22,12 @@ import { Route as AdminPlantsIdImport } from './routes/admin/plants/$id'
 import { Route as DashboardDashboardPlantsImport } from './routes/_dashboard/_dashboard.plants'
 
 // Create/Update Routes
+
+const AuthIndexRoute = AuthIndexImport.update({
+  id: '/auth/',
+  path: '/auth/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AdminIndexRoute = AdminIndexImport.update({
   id: '/admin/',
@@ -87,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexImport
       parentRoute: typeof rootRoute
     }
+    '/auth/': {
+      id: '/auth/'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/_dashboard/_dashboard/plants': {
       id: '/_dashboard/_dashboard/plants'
       path: '/plants'
@@ -150,6 +164,7 @@ const DashboardDashboardRouteWithChildren =
 export interface FileRoutesByFullPath {
   '': typeof DashboardDashboardRouteWithChildren
   '/admin': typeof AdminIndexRoute
+  '/auth': typeof AuthIndexRoute
   '/plants': typeof DashboardDashboardPlantsRoute
   '/admin/plants/$id': typeof AdminPlantsIdRoute
   '/admin/users/$id': typeof AdminUsersIdRoute
@@ -160,6 +175,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
+  '/auth': typeof AuthIndexRoute
   '/plants': typeof DashboardDashboardPlantsRoute
   '/admin/plants/$id': typeof AdminPlantsIdRoute
   '/admin/users/$id': typeof AdminUsersIdRoute
@@ -172,6 +188,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_dashboard/_dashboard': typeof DashboardDashboardRouteWithChildren
   '/admin/': typeof AdminIndexRoute
+  '/auth/': typeof AuthIndexRoute
   '/_dashboard/_dashboard/plants': typeof DashboardDashboardPlantsRoute
   '/admin/plants/$id': typeof AdminPlantsIdRoute
   '/admin/users/$id': typeof AdminUsersIdRoute
@@ -185,6 +202,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/admin'
+    | '/auth'
     | '/plants'
     | '/admin/plants/$id'
     | '/admin/users/$id'
@@ -194,6 +212,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/admin'
+    | '/auth'
     | '/plants'
     | '/admin/plants/$id'
     | '/admin/users/$id'
@@ -204,6 +223,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_dashboard/_dashboard'
     | '/admin/'
+    | '/auth/'
     | '/_dashboard/_dashboard/plants'
     | '/admin/plants/$id'
     | '/admin/users/$id'
@@ -216,6 +236,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   DashboardDashboardRoute: typeof DashboardDashboardRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
+  AuthIndexRoute: typeof AuthIndexRoute
   AdminPlantsIdRoute: typeof AdminPlantsIdRoute
   AdminUsersIdRoute: typeof AdminUsersIdRoute
   AdminPlantsIndexRoute: typeof AdminPlantsIndexRoute
@@ -225,6 +246,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   DashboardDashboardRoute: DashboardDashboardRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
+  AuthIndexRoute: AuthIndexRoute,
   AdminPlantsIdRoute: AdminPlantsIdRoute,
   AdminUsersIdRoute: AdminUsersIdRoute,
   AdminPlantsIndexRoute: AdminPlantsIndexRoute,
@@ -243,6 +265,7 @@ export const routeTree = rootRoute
       "children": [
         "/_dashboard/_dashboard",
         "/admin/",
+        "/auth/",
         "/admin/plants/$id",
         "/admin/users/$id",
         "/admin/plants/",
@@ -258,6 +281,9 @@ export const routeTree = rootRoute
     },
     "/admin/": {
       "filePath": "admin/index.tsx"
+    },
+    "/auth/": {
+      "filePath": "auth/index.tsx"
     },
     "/_dashboard/_dashboard/plants": {
       "filePath": "_dashboard/_dashboard.plants.tsx",

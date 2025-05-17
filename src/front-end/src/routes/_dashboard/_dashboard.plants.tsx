@@ -31,7 +31,7 @@ function RouteComponent() {
     <div className='h-screen w-full max-w-screen'>
       <div className='flex w-full justify-between mb-6'>
         <div className='text-start '>
-          <h1 className='font-bold text-2xl'>My Plants</h1>
+          <h1 className='font-bold text-2xl mb-2'>My Plants</h1>
           <p className='text-gray-600 text-sm'>Manage and monitor your plant collection</p>
         </div>
 

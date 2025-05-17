@@ -11,81 +11,122 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as PlantsImport } from './routes/plants'
-import { Route as IndexImport } from './routes/index'
-import { Route as UsersIndexImport } from './routes/users/index'
-import { Route as UsersRegisterImport } from './routes/users/register'
-import { Route as UsersIdImport } from './routes/users/$id'
+import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as DashboardDashboardImport } from './routes/_dashboard/_dashboard'
+import { Route as AdminUsersIndexImport } from './routes/admin/users/index'
+import { Route as AdminPlantsIndexImport } from './routes/admin/plants/index'
+import { Route as DashboardDashboardIndexImport } from './routes/_dashboard/_dashboard.index'
+import { Route as AdminUsersIdImport } from './routes/admin/users/$id'
+import { Route as AdminPlantsIdImport } from './routes/admin/plants/$id'
+import { Route as DashboardDashboardPlantsImport } from './routes/_dashboard/_dashboard.plants'
 
 // Create/Update Routes
 
-const PlantsRoute = PlantsImport.update({
-  id: '/plants',
-  path: '/plants',
+const AdminIndexRoute = AdminIndexImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const DashboardDashboardRoute = DashboardDashboardImport.update({
+  id: '/_dashboard/_dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminUsersIndexRoute = AdminUsersIndexImport.update({
+  id: '/admin/users/',
+  path: '/admin/users/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminPlantsIndexRoute = AdminPlantsIndexImport.update({
+  id: '/admin/plants/',
+  path: '/admin/plants/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardDashboardIndexRoute = DashboardDashboardIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => DashboardDashboardRoute,
+} as any)
+
+const AdminUsersIdRoute = AdminUsersIdImport.update({
+  id: '/admin/users/$id',
+  path: '/admin/users/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
-const UsersIndexRoute = UsersIndexImport.update({
-  id: '/users/',
-  path: '/users/',
+const AdminPlantsIdRoute = AdminPlantsIdImport.update({
+  id: '/admin/plants/$id',
+  path: '/admin/plants/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
-const UsersRegisterRoute = UsersRegisterImport.update({
-  id: '/users/register',
-  path: '/users/register',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const UsersIdRoute = UsersIdImport.update({
-  id: '/users/$id',
-  path: '/users/$id',
-  getParentRoute: () => rootRoute,
+const DashboardDashboardPlantsRoute = DashboardDashboardPlantsImport.update({
+  id: '/plants',
+  path: '/plants',
+  getParentRoute: () => DashboardDashboardRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+    '/_dashboard/_dashboard': {
+      id: '/_dashboard/_dashboard'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof DashboardDashboardImport
       parentRoute: typeof rootRoute
     }
-    '/plants': {
-      id: '/plants'
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/_dashboard/_dashboard/plants': {
+      id: '/_dashboard/_dashboard/plants'
       path: '/plants'
       fullPath: '/plants'
-      preLoaderRoute: typeof PlantsImport
+      preLoaderRoute: typeof DashboardDashboardPlantsImport
+      parentRoute: typeof DashboardDashboardImport
+    }
+    '/admin/plants/$id': {
+      id: '/admin/plants/$id'
+      path: '/admin/plants/$id'
+      fullPath: '/admin/plants/$id'
+      preLoaderRoute: typeof AdminPlantsIdImport
       parentRoute: typeof rootRoute
     }
-    '/users/$id': {
-      id: '/users/$id'
-      path: '/users/$id'
-      fullPath: '/users/$id'
-      preLoaderRoute: typeof UsersIdImport
+    '/admin/users/$id': {
+      id: '/admin/users/$id'
+      path: '/admin/users/$id'
+      fullPath: '/admin/users/$id'
+      preLoaderRoute: typeof AdminUsersIdImport
       parentRoute: typeof rootRoute
     }
-    '/users/register': {
-      id: '/users/register'
-      path: '/users/register'
-      fullPath: '/users/register'
-      preLoaderRoute: typeof UsersRegisterImport
+    '/_dashboard/_dashboard/': {
+      id: '/_dashboard/_dashboard/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof DashboardDashboardIndexImport
+      parentRoute: typeof DashboardDashboardImport
+    }
+    '/admin/plants/': {
+      id: '/admin/plants/'
+      path: '/admin/plants'
+      fullPath: '/admin/plants'
+      preLoaderRoute: typeof AdminPlantsIndexImport
       parentRoute: typeof rootRoute
     }
-    '/users/': {
-      id: '/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof UsersIndexImport
+    '/admin/users/': {
+      id: '/admin/users/'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -93,60 +134,101 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface DashboardDashboardRouteChildren {
+  DashboardDashboardPlantsRoute: typeof DashboardDashboardPlantsRoute
+  DashboardDashboardIndexRoute: typeof DashboardDashboardIndexRoute
+}
+
+const DashboardDashboardRouteChildren: DashboardDashboardRouteChildren = {
+  DashboardDashboardPlantsRoute: DashboardDashboardPlantsRoute,
+  DashboardDashboardIndexRoute: DashboardDashboardIndexRoute,
+}
+
+const DashboardDashboardRouteWithChildren =
+  DashboardDashboardRoute._addFileChildren(DashboardDashboardRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/plants': typeof PlantsRoute
-  '/users/$id': typeof UsersIdRoute
-  '/users/register': typeof UsersRegisterRoute
-  '/users': typeof UsersIndexRoute
+  '': typeof DashboardDashboardRouteWithChildren
+  '/admin': typeof AdminIndexRoute
+  '/plants': typeof DashboardDashboardPlantsRoute
+  '/admin/plants/$id': typeof AdminPlantsIdRoute
+  '/admin/users/$id': typeof AdminUsersIdRoute
+  '/': typeof DashboardDashboardIndexRoute
+  '/admin/plants': typeof AdminPlantsIndexRoute
+  '/admin/users': typeof AdminUsersIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/plants': typeof PlantsRoute
-  '/users/$id': typeof UsersIdRoute
-  '/users/register': typeof UsersRegisterRoute
-  '/users': typeof UsersIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/plants': typeof DashboardDashboardPlantsRoute
+  '/admin/plants/$id': typeof AdminPlantsIdRoute
+  '/admin/users/$id': typeof AdminUsersIdRoute
+  '/': typeof DashboardDashboardIndexRoute
+  '/admin/plants': typeof AdminPlantsIndexRoute
+  '/admin/users': typeof AdminUsersIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/plants': typeof PlantsRoute
-  '/users/$id': typeof UsersIdRoute
-  '/users/register': typeof UsersRegisterRoute
-  '/users/': typeof UsersIndexRoute
+  '/_dashboard/_dashboard': typeof DashboardDashboardRouteWithChildren
+  '/admin/': typeof AdminIndexRoute
+  '/_dashboard/_dashboard/plants': typeof DashboardDashboardPlantsRoute
+  '/admin/plants/$id': typeof AdminPlantsIdRoute
+  '/admin/users/$id': typeof AdminUsersIdRoute
+  '/_dashboard/_dashboard/': typeof DashboardDashboardIndexRoute
+  '/admin/plants/': typeof AdminPlantsIndexRoute
+  '/admin/users/': typeof AdminUsersIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/plants' | '/users/$id' | '/users/register' | '/users'
+  fullPaths:
+    | ''
+    | '/admin'
+    | '/plants'
+    | '/admin/plants/$id'
+    | '/admin/users/$id'
+    | '/'
+    | '/admin/plants'
+    | '/admin/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/plants' | '/users/$id' | '/users/register' | '/users'
+  to:
+    | '/admin'
+    | '/plants'
+    | '/admin/plants/$id'
+    | '/admin/users/$id'
+    | '/'
+    | '/admin/plants'
+    | '/admin/users'
   id:
     | '__root__'
-    | '/'
-    | '/plants'
-    | '/users/$id'
-    | '/users/register'
-    | '/users/'
+    | '/_dashboard/_dashboard'
+    | '/admin/'
+    | '/_dashboard/_dashboard/plants'
+    | '/admin/plants/$id'
+    | '/admin/users/$id'
+    | '/_dashboard/_dashboard/'
+    | '/admin/plants/'
+    | '/admin/users/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  PlantsRoute: typeof PlantsRoute
-  UsersIdRoute: typeof UsersIdRoute
-  UsersRegisterRoute: typeof UsersRegisterRoute
-  UsersIndexRoute: typeof UsersIndexRoute
+  DashboardDashboardRoute: typeof DashboardDashboardRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminPlantsIdRoute: typeof AdminPlantsIdRoute
+  AdminUsersIdRoute: typeof AdminUsersIdRoute
+  AdminPlantsIndexRoute: typeof AdminPlantsIndexRoute
+  AdminUsersIndexRoute: typeof AdminUsersIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  PlantsRoute: PlantsRoute,
-  UsersIdRoute: UsersIdRoute,
-  UsersRegisterRoute: UsersRegisterRoute,
-  UsersIndexRoute: UsersIndexRoute,
+  DashboardDashboardRoute: DashboardDashboardRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminPlantsIdRoute: AdminPlantsIdRoute,
+  AdminUsersIdRoute: AdminUsersIdRoute,
+  AdminPlantsIndexRoute: AdminPlantsIndexRoute,
+  AdminUsersIndexRoute: AdminUsersIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -159,27 +241,43 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/plants",
-        "/users/$id",
-        "/users/register",
-        "/users/"
+        "/_dashboard/_dashboard",
+        "/admin/",
+        "/admin/plants/$id",
+        "/admin/users/$id",
+        "/admin/plants/",
+        "/admin/users/"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_dashboard/_dashboard": {
+      "filePath": "_dashboard/_dashboard.tsx",
+      "children": [
+        "/_dashboard/_dashboard/plants",
+        "/_dashboard/_dashboard/"
+      ]
     },
-    "/plants": {
-      "filePath": "plants.tsx"
+    "/admin/": {
+      "filePath": "admin/index.tsx"
     },
-    "/users/$id": {
-      "filePath": "users/$id.tsx"
+    "/_dashboard/_dashboard/plants": {
+      "filePath": "_dashboard/_dashboard.plants.tsx",
+      "parent": "/_dashboard/_dashboard"
     },
-    "/users/register": {
-      "filePath": "users/register.tsx"
+    "/admin/plants/$id": {
+      "filePath": "admin/plants/$id.tsx"
     },
-    "/users/": {
-      "filePath": "users/index.tsx"
+    "/admin/users/$id": {
+      "filePath": "admin/users/$id.tsx"
+    },
+    "/_dashboard/_dashboard/": {
+      "filePath": "_dashboard/_dashboard.index.tsx",
+      "parent": "/_dashboard/_dashboard"
+    },
+    "/admin/plants/": {
+      "filePath": "admin/plants/index.tsx"
+    },
+    "/admin/users/": {
+      "filePath": "admin/users/index.tsx"
     }
   }
 }

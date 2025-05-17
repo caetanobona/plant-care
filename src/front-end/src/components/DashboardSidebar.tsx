@@ -32,7 +32,12 @@ const menuItems = [
 export function DashboardSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader />
+      <SidebarHeader className="items-start p-4 border-b-1">
+        <p className="flex items-center">
+          <Leaf className="w-5 text-green-500"/>
+          <span className="text-xl text-green-500 pl-2">PlantCare</span>
+        </p>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarMenu className="p-2">
           {menuItems.map((item) => (
@@ -47,7 +52,9 @@ export function DashboardSidebar() {
           ))}
         </SidebarMenu>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        Profile
+      </SidebarFooter>
     </Sidebar>
   )
 }

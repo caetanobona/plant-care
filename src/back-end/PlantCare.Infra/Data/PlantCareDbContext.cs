@@ -1,19 +1,21 @@
 using Microsoft.EntityFrameworkCore;
-using PlantCare.Infra.Persistence.Entities;
+using PlantCare.Application.Context;
+using PlantCare.Domain.Entities;
+
 namespace PlantCare.Infra.Data;
 
-public class AppDbContext : DbContext
+public class PlantCareDbContext : DbContext, IPlantCareDbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    public PlantCareDbContext(DbContextOptions<PlantCareDbContext> options) : base(options)
     {
     }
 
-    public DbSet<UserEntity> Users { get; set; }
-    public DbSet<PlantEntity> Plants { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Plant> Plants { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<UserEntity>(entity =>
+        modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("users_pkey");
 
@@ -47,7 +49,7 @@ public class AppDbContext : DbContext
                 .HasColumnName("username");
         });
         
-        modelBuilder.Entity<PlantEntity>(entity =>
+        modelBuilder.Entity<Plant>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("plants_pkey");
 
@@ -79,7 +81,7 @@ public class AppDbContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.WateringInterval).HasColumnName("watering_interval");
 
-            entity.HasOne(d => d.UserEntity).WithMany(p => p.Plants)
+            entity.HasOne(d => d.User).WithMany(p => p.Plants)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("plants_user_id_fkey");
         });

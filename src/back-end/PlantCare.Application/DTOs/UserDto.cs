@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PlantCare.Domain.Entities;
+namespace PlantCare.Application.DTOs;
 
-public class User :  BaseEntity
+public class UserDto
 {
     [Required]
     [MaxLength(320)]

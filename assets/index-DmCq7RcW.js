@@ -1,0 +1,1 @@
+import{j as n,p as o,i as t}from"./index-C-ydV1PE.js";import{A as s}from"./AdminTable-TsjEI2mH.js";const i=function(){return n.jsxs("div",{children:[n.jsx("h1",{className:"font-bold py-4 mt-4",children:"Admin Plants View"}),n.jsx(s,{columns:t,data:o})]})};export{i as component};

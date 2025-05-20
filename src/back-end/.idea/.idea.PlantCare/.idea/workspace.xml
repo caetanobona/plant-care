@@ -10,13 +10,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bb99739-5c99-4239-ab69-552d4429dc82" name="Changes" comment="project reset&#10;&#10;# Conflicts:&#10;#&#9;src/back-end/.idea/.idea.PlantCare/.idea/workspace.xml&#10;#&#9;src/front-end/plant-care/package-lock.json&#10;#&#9;src/front-end/plant-care/package.json&#10;#&#9;src/front-end/plant-care/tsconfig.app.json&#10;#&#9;src/front-end/plant-care/tsconfig.node.json" />
+    <list default="true" id="5bb99739-5c99-4239-ab69-552d4429dc82" name="Changes" comment="project reset&#10;&#10;# Conflicts:&#10;#&#9;src/back-end/.idea/.idea.PlantCare/.idea/workspace.xml&#10;#&#9;src/front-end/plant-care/package-lock.json&#10;#&#9;src/front-end/plant-care/package.json&#10;#&#9;src/front-end/plant-care/tsconfig.app.json&#10;#&#9;src/front-end/plant-care/tsconfig.node.json">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PlantCare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PlantCare/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/Entities/Plant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/Entities/Plant.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfoInputs.cache" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -32,10 +42,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/back-end/PlantCare.API/appsettings.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/back-end/PlantCare.API/obj/Debug/net9.0/PlantCare.API.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/front-end/plant-care/package.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/front-end/plant-care/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/back-end/PlantCare.Domain/Entities/Plant.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -59,7 +66,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/1-create-api-structure-ddd&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/21-contexto-tabelas-users-plants&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -109,6 +116,11 @@
       <updated>1746983751816</updated>
       <workItem from="1746983753103" duration="4921000" />
       <workItem from="1746991515909" duration="369000" />
+      <workItem from="1747675119732" duration="594000" />
+      <workItem from="1747675735634" duration="980000" />
+      <workItem from="1747677059934" duration="877000" />
+      <workItem from="1747689613453" duration="1827000" />
+      <workItem from="1747740309388" duration="1800000" />
     </task>
     <task id="LOCAL-00001" summary="added folder structure following DDD pattern">
       <option name="closed" value="true" />

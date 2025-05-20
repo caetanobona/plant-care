@@ -23,25 +23,25 @@ public class AppDbContext : DbContext
                 .HasColumnName("id")
                 .ValueGeneratedOnAdd();
             
-            entity.Property(e => e.Name)
-                .HasColumnName("name")
-                .IsRequired()
-                .HasMaxLength(255);
-            
             entity.Property(e => e.Email)
                 .HasColumnName("email")
                 .IsRequired()
                 .HasMaxLength(320);
-
+            
             entity.HasIndex(e => e.Email)
                 .IsUnique();
+            
+            entity.Property(e => e.Name)
+                .HasColumnName("name")
+                .IsRequired()
+                .HasMaxLength(255);
 
-            entity.Property(e => e.Password)
+            entity.Property(e => e.PasswordHash)
                 .HasColumnName("password")
                 .IsRequired()
                 .HasMaxLength(100);
 
-            entity.Property(e => e.IsActive)
+            entity.Property(e => e.Active)
                 .HasColumnName("is_active")
                 .HasColumnType("tinyint(1)")
                 .HasDefaultValue(true)

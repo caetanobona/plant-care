@@ -5,6 +5,8 @@ namespace PlantCare.Domain.Entities;
 public class Plant : BaseEntity
 {
     [Required]
+    public User User { get; set; }
+    [Required]
     [MaxLength(50)]
     public string Name { get; set; }
     [Required]
@@ -14,14 +16,10 @@ public class Plant : BaseEntity
     public bool Active { get; set; }
     [Required]
     [MaxLength(255)]
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
     [Required]
     public TimeSpan WateringInterval { get; set; }
-    public DateTime LastWatered { get; set; }
+    public DateTime? LastWatered { get; set; }
     [MaxLength(50)]
-    public string LightRequirements { get; set; }
-    [Required]
-    public DateTime CreatedAt { get; set; }
-    [Required]
-    public DateTime UpdatedAt { get; set; }
+    public string? LightRequirements { get; set; }
 }

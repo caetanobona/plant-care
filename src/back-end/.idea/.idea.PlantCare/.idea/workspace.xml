@@ -11,22 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bb99739-5c99-4239-ab69-552d4429dc82" name="Changes" comment="project reset&#10;&#10;# Conflicts:&#10;#&#9;src/back-end/.idea/.idea.PlantCare/.idea/workspace.xml&#10;#&#9;src/front-end/plant-care/package-lock.json&#10;#&#9;src/front-end/plant-care/package.json&#10;#&#9;src/front-end/plant-care/tsconfig.app.json&#10;#&#9;src/front-end/plant-care/tsconfig.node.json">
-      <change afterPath="$PROJECT_DIR$/PlantCare.Domain/Entities/Plant.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PlantCare/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PlantCare/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.API/PlantCare.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.API/PlantCare.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Application/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/Entities/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/Repositories/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/Entities/Plant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/Entities/Plant.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/Debug/net9.0/PlantCare.Domain.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Domain/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Infra/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Infra/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra/Data/AppDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlantCare.Infra/PlantCare.Infra.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PlantCare.Infra/PlantCare.Infra.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,10 +42,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/back-end/PlantCare.API/appsettings.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/back-end/PlantCare.API/obj/Debug/net9.0/PlantCare.API.AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/front-end/plant-care/package.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/front-end/plant-care/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Caetano/Desktop/code/! PlantCare/src/back-end/PlantCare.Domain/Entities/Plant.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -135,6 +120,7 @@
       <workItem from="1747675735634" duration="980000" />
       <workItem from="1747677059934" duration="877000" />
       <workItem from="1747689613453" duration="1827000" />
+      <workItem from="1747740309388" duration="1800000" />
     </task>
     <task id="LOCAL-00001" summary="added folder structure following DDD pattern">
       <option name="closed" value="true" />

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using FluentValidation;
 using PlantCare.Domain.Entities;
 

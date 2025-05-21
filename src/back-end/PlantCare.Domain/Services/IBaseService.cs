@@ -8,11 +8,11 @@ public interface IBaseService<TEntity> where TEntity : BaseEntity
 {
     TEntity Add<TValidator>(TEntity obj) where TValidator : AbstractValidator<TEntity>;
 
-    void Delete(int id);
+    void Delete(long id);
     
-    IList<TEntity> Get();
+    IList<TEntity> GetAll();
     
-    TEntity GetByID(int id);
+    TEntity GetById(long id);
     
     TEntity Update<TValidator>(TEntity obj) where TValidator : AbstractValidator<TEntity>;
 }

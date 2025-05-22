@@ -10,5 +10,5 @@ public class UserDto
 
     public string Username { get; set; }
 
-    public bool Active { get; set; }
+    public bool? Active { get; set; }
 }

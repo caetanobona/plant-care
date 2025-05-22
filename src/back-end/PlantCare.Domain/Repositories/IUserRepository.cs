@@ -1,8 +1,9 @@
+using System.Threading.Tasks;
 using PlantCare.Domain.Entities;
 
 namespace PlantCare.Domain.Repositories;
 
 public interface IUserRepository : IBaseRepository<User>
 {
-    User GetByUsername(string username);
+    Task<User?> GetByUsername(string username);
 }

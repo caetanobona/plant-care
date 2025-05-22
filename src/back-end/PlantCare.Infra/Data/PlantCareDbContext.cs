@@ -29,24 +29,32 @@ public class PlantCareDbContext : DbContext, IPlantCareDbContext
             entity.Property(e => e.Active)
                 .HasDefaultValue(true)
                 .HasColumnName("active");
+            
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnName("created_at");
+            
             entity.Property(e => e.Email)
                 .HasMaxLength(320)
                 .HasColumnName("email");
+            
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
+            
             entity.Property(e => e.PasswordHash)
                 .HasMaxLength(255)
                 .HasColumnName("password_hash");
+            
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnName("updated_at");
+            
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .HasColumnName("username");
+            
+            entity.HasQueryFilter(e => e.Active);
         });
         
         modelBuilder.Entity<Plant>(entity =>
@@ -84,6 +92,8 @@ public class PlantCareDbContext : DbContext, IPlantCareDbContext
             entity.HasOne(d => d.User).WithMany(p => p.Plants)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("plants_user_id_fkey");
+            
+            entity.HasQueryFilter(e => e.Active);
         });
         
         base.OnModelCreating(modelBuilder);

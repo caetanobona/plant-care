@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using FluentValidation;
 using PlantCare.Domain.Entities;
 
@@ -8,11 +7,11 @@ public interface IBaseService<TEntity> where TEntity : BaseEntity
 {
     TEntity Add<TValidator>(TEntity obj) where TValidator : AbstractValidator<TEntity>;
 
-    void Delete(long id);
+    void Delete(int id);
     
-    IList<TEntity> GetAll();
+    IList<TEntity> Get();
     
-    TEntity GetById(long id);
+    TEntity GetByID(int id);
     
     TEntity Update<TValidator>(TEntity obj) where TValidator : AbstractValidator<TEntity>;
 }

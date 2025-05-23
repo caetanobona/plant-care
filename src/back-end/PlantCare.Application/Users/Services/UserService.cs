@@ -1,6 +1,7 @@
 using AutoMapper;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.Interfaces;
+using PlantCare.Domain.Entities;
 using PlantCare.Domain.Repositories;
 
 namespace PlantCare.Application.Users.Services;
@@ -9,11 +10,26 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
+    
+    private const int BcryptWorkFactor = 12;
 
     public UserService(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
+    }
+
+    public async Task<CreateUserDtoResponse> CreateAsync(CreateUserDtoRequest req)
+    {
+        var userEntity = _mapper.Map<User>(req);
+        
+        userEntity.PasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(req.Password, BcryptWorkFactor);
+        
+        var createdUser = await _userRepository.InsertAsync(userEntity);
+        
+        var createdUserDto = _mapper.Map<CreateUserDtoResponse>(createdUser);
+        
+        return createdUserDto;
     }
 
     public async Task<List<UserDto>> GetAllAsync()

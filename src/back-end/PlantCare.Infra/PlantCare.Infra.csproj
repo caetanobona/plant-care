@@ -8,8 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Migrations\" />
-      <Folder Include="Persistence\Entities\" />
-      <Folder Include="Repositories\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -18,6 +16,7 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.4" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -26,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PlantCare.Application\PlantCare.Application.csproj" />
       <ProjectReference Include="..\PlantCare.Domain\PlantCare.Domain.csproj" />
     </ItemGroup>
 

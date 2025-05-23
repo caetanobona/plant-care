@@ -14,7 +14,7 @@ namespace Plantcare.API.Controllers
         {
             _userService = userService;
         }
-git 
+        
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {

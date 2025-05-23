@@ -6,9 +6,9 @@ namespace PlantCare.Domain.Repositories;
 
 public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 {
-    Task InsertAsync(TEntity obj);
-    Task UpdateAsync(TEntity obj);
-    Task DeleteAsync(long id);
+    Task<User?> InsertAsync(TEntity obj);
+    Task<User?> UpdateAsync(TEntity obj);
+    Task<bool> DeleteAsync(long id);
     Task<List<TEntity>> GetAllAsync();
     Task<TEntity?> GetByIdAsync(long id);
 }

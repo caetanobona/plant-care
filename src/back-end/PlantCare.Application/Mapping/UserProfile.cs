@@ -9,5 +9,7 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<User, UserDto>();
+        CreateMap<CreateUserDtoRequest, User>();
+        CreateMap<User, CreateUserDtoResponse>();
     }
 }

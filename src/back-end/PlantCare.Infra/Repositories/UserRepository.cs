@@ -16,17 +16,20 @@ public class UserRepository : IUserRepository
         _dbContext = context;
     }
     
-    public async Task InsertAsync(User obj)
+    public async Task<User?> InsertAsync(User obj)
+    {
+        var newUser = await _dbContext.Users.AddAsync(obj);
+        await _dbContext.SaveChangesAsync();
+        
+        return newUser.Entity;
+    }
+
+    public async Task<User?> UpdateAsync(User obj)
     {
         throw new NotImplementedException();
     }
 
-    public async Task UpdateAsync(User obj)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task DeleteAsync(long id)
+    public async Task<bool> DeleteAsync(long id)
     {
         throw new NotImplementedException();
     }

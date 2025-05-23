@@ -9,6 +9,5 @@ public class UserDto
     public string Name { get; set; }
 
     public string Username { get; set; }
-
-    public bool? Active { get; set; }
+    
 }

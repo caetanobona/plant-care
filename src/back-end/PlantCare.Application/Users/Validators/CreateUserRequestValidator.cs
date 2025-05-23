@@ -3,9 +3,9 @@ using PlantCare.Application.DTOs;
 
 namespace PlantCare.Application.Users.Validators;
 
-public class CreateUserDtoRequestValidator : AbstractValidator<CreateUserDtoRequest>
+public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
 {
-    public CreateUserDtoRequestValidator()
+    public CreateUserRequestValidator()
     {
         RuleFor(x => x.Username)
             .NotEmpty().WithMessage("Username is required")
@@ -24,7 +24,7 @@ public class CreateUserDtoRequestValidator : AbstractValidator<CreateUserDtoRequ
 
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required")
-            .MinimumLength(3).WithMessage("Must be at least 8 characters")
+            .MinimumLength(8).WithMessage("Must be at least 8 characters")
             .MaximumLength(50).WithMessage("Password exceeds 50 characters");
     }
 }

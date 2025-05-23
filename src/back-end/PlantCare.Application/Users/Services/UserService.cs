@@ -19,7 +19,7 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<CreateUserDtoResponse> CreateAsync(CreateUserDtoRequest req)
+    public async Task<CreateUserDtoResponse> CreateAsync(CreateUserRequest req)
     {
         var userEntity = _mapper.Map<User>(req);
         

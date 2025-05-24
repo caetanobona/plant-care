@@ -1,5 +1,6 @@
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.DTOs;
+using PlantCare.Application.Users.Models;
 
 namespace PlantCare.Application.Users.Interfaces;
 

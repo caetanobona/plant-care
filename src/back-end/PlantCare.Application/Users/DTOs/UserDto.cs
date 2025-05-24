@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PlantCare.Application.DTOs;
+namespace PlantCare.Application.Users.DTOs;
 
 public class UserDto
 {

@@ -2,6 +2,7 @@ using AutoMapper;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.DTOs;
 using PlantCare.Application.Users.Interfaces;
+using PlantCare.Application.Users.Models;
 using PlantCare.Domain.Entities;
 using PlantCare.Domain.Repositories;
 
@@ -21,7 +22,7 @@ public class UserService : IUserService
     }
 
     public async Task<CreateUpdateUserDtoResponse> CreateAsync(CreateUserRequest req)
-    {
+    {   
         var userEntity = _mapper.Map<User>(req);
         
         userEntity.PasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(req.Password, BcryptWorkFactor);
@@ -31,6 +32,27 @@ public class UserService : IUserService
         var createdUserDto = _mapper.Map<CreateUpdateUserDtoResponse>(createdUser);
         
         return createdUserDto;
+    }
+
+    public async Task<CreateUpdateUserDtoResponse> UpdateAsync(UpdateUserRequest req)
+    {
+        var storedUser = await _userRepository.GetByIdAsync(req.Id);
+
+        if (storedUser == null)
+        {
+            throw new EntryPointNotFoundException();
+        }
+        
+        _mapper.Map(req, storedUser);
+        
+        if (!string.IsNullOrEmpty(req.Password))
+        {
+            storedUser.PasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(req.Password, BcryptWorkFactor);
+        }
+        
+        var patchedUser = await _userRepository.UpdateAsync(storedUser);
+        
+        return _mapper.Map<CreateUpdateUserDtoResponse>(patchedUser);
     }
 
     public async Task<List<UserDto>> GetAllAsync()
@@ -62,6 +84,7 @@ public class UserService : IUserService
         return userDto;
     }
 
+    
     public async Task<bool> DoesEmailExist(string email) => await _userRepository.DoesEmailExist(email);
     public async Task<bool> DoesUsernameExist(string username) => await _userRepository.DoesUsernameExist(username);
 }

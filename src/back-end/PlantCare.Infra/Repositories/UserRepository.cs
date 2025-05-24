@@ -26,7 +26,11 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> UpdateAsync(User obj)
     {
-        throw new NotImplementedException();
+        var updatedUser = _dbContext.Users.Update(obj);
+        
+        await _dbContext.SaveChangesAsync();
+        
+        return updatedUser.Entity;
     }
 
     public async Task<bool> DeleteAsync(long id)
@@ -59,28 +63,22 @@ public class UserRepository : IUserRepository
         
         return user;
     }
-
+    
     public async Task<bool> DoesUsernameExist(string username)
     {
-        var existingUser = await _dbContext.Users.FindAsync(username);
+        var result = await _dbContext.Users.AnyAsync(u => u.Username == username);
         
-        if (existingUser == null)
-        {
-            return false;
-        }
+        Console.WriteLine($"checking username {username} = {result}");
 
-        return true;
+        return result;
     }
-    
+
     public async Task<bool> DoesEmailExist(string email)
     {
-        var existingUser = await _dbContext.Users.FindAsync(email);
+        var result = await _dbContext.Users.AnyAsync(u => u.Email == email);
         
-        if (existingUser == null)
-        {
-            return false;
-        }
+        Console.WriteLine($"checking email {email} - {result}");
 
-        return true;
+        return result;
     }
 }

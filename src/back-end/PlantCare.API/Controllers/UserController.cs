@@ -1,9 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.Interfaces;
+using PlantCare.Application.Users.Models;
 using PlantCare.Application.Users.Validators;
 
 namespace Plantcare.API.Controllers
@@ -13,18 +13,20 @@ namespace Plantcare.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly CreateUserRequestValidator _validator;
+        private readonly CreateUserRequestValidator _createValidator;
+        private readonly UpdateUserRequestValidator _updateValidator;
 
-        public UserController(IUserService userService, CreateUserRequestValidator validator)
+        public UserController(IUserService userService, CreateUserRequestValidator createValidator, UpdateUserRequestValidator updateValidator)
         {
             _userService = userService;
-            _validator = validator;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] CreateUserRequest request)
         {
-            var validationResult = await _validator.ValidateAsync(request);
+            var validationResult = await _createValidator.ValidateAsync(request);
             
             if (!validationResult.IsValid)
             {
@@ -33,6 +35,20 @@ namespace Plantcare.API.Controllers
             
             var createdUser = await _userService.CreateAsync(request);
             return Ok(createdUser);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserRequest request)
+        {
+            var validationResult = await _updateValidator.ValidateAsync(request);
+            
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage).ToList());
+            }
+            
+            var updatedUser = await _userService.UpdateAsync(request);
+            return Ok(updatedUser);
         }
         
         [HttpGet]

@@ -59,4 +59,22 @@ public class UserRepository : IUserRepository
         
         return user;
     }
+    
+    public async Task<bool> DoesUsernameExist(string username)
+    {
+        var result = await _dbContext.Users.AnyAsync(u => u.Username == username);
+        
+        Console.WriteLine($"checking username {username} = {result}");
+
+        return result;
+    }
+
+    public async Task<bool> DoesEmailExist(string email)
+    {
+        var result = await _dbContext.Users.AnyAsync(u => u.Email == email);
+        
+        Console.WriteLine($"checking email {email} - {result}");
+
+        return result;
+    }
 }

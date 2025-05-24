@@ -61,4 +61,7 @@ public class UserService : IUserService
         return userDto;
     }
 
+    
+    public async Task<bool> DoesEmailExist(string email) => await _userRepository.DoesEmailExist(email);
+    public async Task<bool> DoesUsernameExist(string username) => await _userRepository.DoesUsernameExist(username);
 }

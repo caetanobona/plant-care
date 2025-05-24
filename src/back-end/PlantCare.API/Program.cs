@@ -4,6 +4,7 @@ using PlantCare.Application.Context;
 using PlantCare.Application.Mapping;
 using PlantCare.Application.Users.Interfaces;
 using PlantCare.Application.Users.Services;
+using PlantCare.Application.Users.Validators;
 using PlantCare.Domain.Repositories;
 using PlantCare.Infra.Data;
 using PlantCare.Infra.Repositories;
@@ -18,6 +19,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
+
+builder.Services.AddScoped<CreateUserRequestValidator>();
+builder.Services.AddScoped<UpdateUserRequestValidator>();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -39,8 +43,7 @@ using (var scope = app.Services.CreateScope())
 
     if (!dbContext.Database.CanConnect())
     {
-        Console.WriteLine("Database connection could not be established");
-        // throw new NotImplementedException("Can't connect to database");
+        throw new NotImplementedException("Can't connect to database");
     }
 }
 

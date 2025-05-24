@@ -26,7 +26,11 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> UpdateAsync(User obj)
     {
-        throw new NotImplementedException();
+        var updatedUser = _dbContext.Users.Update(obj);
+        
+        await _dbContext.SaveChangesAsync();
+        
+        return updatedUser.Entity;
     }
 
     public async Task<bool> DeleteAsync(long id)

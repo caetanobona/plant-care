@@ -59,4 +59,28 @@ public class UserRepository : IUserRepository
         
         return user;
     }
+
+    public async Task<bool> DoesUsernameExist(string username)
+    {
+        var existingUser = await _dbContext.Users.FindAsync(username);
+        
+        if (existingUser == null)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    
+    public async Task<bool> DoesEmailExist(string email)
+    {
+        var existingUser = await _dbContext.Users.FindAsync(email);
+        
+        if (existingUser == null)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

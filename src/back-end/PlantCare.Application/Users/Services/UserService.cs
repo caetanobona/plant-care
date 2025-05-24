@@ -1,5 +1,6 @@
 using AutoMapper;
 using PlantCare.Application.DTOs;
+using PlantCare.Application.Users.DTOs;
 using PlantCare.Application.Users.Interfaces;
 using PlantCare.Domain.Entities;
 using PlantCare.Domain.Repositories;
@@ -19,7 +20,7 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<CreateUserDtoResponse> CreateAsync(CreateUserRequest req)
+    public async Task<CreateUpdateUserDtoResponse> CreateAsync(CreateUserRequest req)
     {
         var userEntity = _mapper.Map<User>(req);
         
@@ -27,7 +28,7 @@ public class UserService : IUserService
         
         var createdUser = await _userRepository.InsertAsync(userEntity);
         
-        var createdUserDto = _mapper.Map<CreateUserDtoResponse>(createdUser);
+        var createdUserDto = _mapper.Map<CreateUpdateUserDtoResponse>(createdUser);
         
         return createdUserDto;
     }
@@ -61,4 +62,6 @@ public class UserService : IUserService
         return userDto;
     }
 
+    public async Task<bool> DoesEmailExist(string email) => await _userRepository.DoesEmailExist(email);
+    public async Task<bool> DoesUsernameExist(string username) => await _userRepository.DoesUsernameExist(username);
 }

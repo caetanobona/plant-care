@@ -1,6 +1,10 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.Interfaces;
+using PlantCare.Application.Users.Validators;
 
 namespace Plantcare.API.Controllers
 {
@@ -9,10 +13,26 @@ namespace Plantcare.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly CreateUserRequestValidator _validator;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, CreateUserRequestValidator validator)
         {
             _userService = userService;
+            _validator = validator;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync([FromBody] CreateUserRequest request)
+        {
+            var validationResult = await _validator.ValidateAsync(request);
+            
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage).ToList());
+            }
+            
+            var createdUser = await _userService.CreateAsync(request);
+            return Ok(createdUser);
         }
         
         [HttpGet]

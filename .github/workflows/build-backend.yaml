@@ -1,0 +1,35 @@
+name: build-backend
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:17.5 
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: plantcare
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"  
+          --health-interval=10s  
+          --health-timeout=5s  
+          --health-retries=5
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./src/back-end
+    - name: Build
+      run: dotnet build ./src/back-end/PlantCare.API/PlantCare.API.csproj --no-restore
+    - name: Test
+      run: dotnet test ./src/back-end --no-build --verbosity normal

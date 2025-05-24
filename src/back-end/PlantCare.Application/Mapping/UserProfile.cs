@@ -11,10 +11,16 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<User, UserDto>();
-        CreateMap<CreateUserRequest, User>();
+        CreateMap<CreateUserRequest, User>()
+            .ForMember(dest => dest.Active, o => o
+                .MapFrom(src => true));
         CreateMap<User, CreateUpdateUserDtoResponse>();
         CreateMap<UpdateUserRequest, User>()
+            .ForMember(
+                dest => dest.Active, o => o
+                    .MapFrom(src => true))
             .ForAllMembers(
-                o => o.Condition((src, dest, srcMember) => srcMember != null));
+                o => o
+                    .Condition((src, dest, srcMember) => srcMember != null));
     }
 }

@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using PlantCare.Application.Context;
 using PlantCare.Application.Mapping;
 using PlantCare.Application.Users.Interfaces;
@@ -16,7 +17,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();  
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo  
+    {  
+        Version = "v1",  
+        Title = "PlantCare API",  
+        Description = "An API for managing plant care information"
+});
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
 

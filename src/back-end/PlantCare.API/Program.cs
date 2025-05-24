@@ -19,11 +19,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();  
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo  
-    {  
-        Version = "v1",  
-        Title = "PlantCare API",  
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "PlantCare API",
         Description = "An API for managing plant care information"
+    });
 });
 
 builder.Services.AddAutoMapper(typeof(UserProfile));

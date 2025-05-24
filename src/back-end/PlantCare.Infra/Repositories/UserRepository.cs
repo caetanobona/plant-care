@@ -32,10 +32,21 @@ public class UserRepository : IUserRepository
         
         return updatedUser.Entity;
     }
-
+    
     public async Task<bool> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        var user = await _dbContext.Users.FindAsync(id);
+
+        if (user == null)
+        {
+            return false;
+        }
+            
+        user.Active = false;
+        _dbContext.Users.Update(user);
+        await _dbContext.SaveChangesAsync();
+
+        return true;
     }
 
     public async Task<List<User>> GetAllAsync()
@@ -80,5 +91,12 @@ public class UserRepository : IUserRepository
         Console.WriteLine($"checking email {email} - {result}");
 
         return result;
+    }
+
+    public async Task<bool> ExistsAsync(long id)
+    {
+        var result = await _dbContext.Users.FindAsync(id);
+        
+        return result != null;
     }
 }

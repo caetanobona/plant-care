@@ -22,6 +22,19 @@ namespace Plantcare.API.Controllers
             _createValidator = createValidator;
             _updateValidator = updateValidator;
         }
+
+        [HttpDelete("{id:long}")]
+        public async Task<IActionResult> DeleteAsync(long id)
+        {
+            var result = await _userService.DeleteAsync(id);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+            
+            return Ok();
+        }
         
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] CreateUserRequest request)

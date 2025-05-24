@@ -55,6 +55,19 @@ public class UserService : IUserService
         return _mapper.Map<CreateUpdateUserDtoResponse>(patchedUser);
     }
 
+    public async Task<bool> DeleteAsync(long id)
+    {
+        var existingUser = await _userRepository.ExistsAsync(id);
+        
+        if (!existingUser)
+        {
+            return false;
+        }
+        var result = await _userRepository.DeleteAsync(id);
+        
+        return true;
+    }
+    
     public async Task<List<UserDto>> GetAllAsync()
     {
         var usersEntities = await _userRepository.GetAllAsync();
@@ -87,4 +100,5 @@ public class UserService : IUserService
     
     public async Task<bool> DoesEmailExist(string email) => await _userRepository.DoesEmailExist(email);
     public async Task<bool> DoesUsernameExist(string username) => await _userRepository.DoesUsernameExist(username);
+    public async Task<bool> ExistsAsync(long id) => await _userRepository.ExistsAsync(id);
 }

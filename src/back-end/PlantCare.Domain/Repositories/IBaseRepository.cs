@@ -11,4 +11,5 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     Task<bool> DeleteAsync(long id);
     Task<List<TEntity>> GetAllAsync();
     Task<TEntity?> GetByIdAsync(long id);
+    Task<bool> ExistsAsync(long id);
 }

@@ -26,12 +26,7 @@ namespace Plantcare.API.Controllers
         [HttpDelete("{id:long}")]
         public async Task<IActionResult> DeleteAsync(long id)
         {
-            var result = await _userService.DeleteAsync(id);
-
-            if (!result)
-            {
-                return NotFound();
-            }
+            await _userService.DeleteAsync(id);
             
             return Ok();
         }

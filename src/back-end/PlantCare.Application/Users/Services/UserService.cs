@@ -55,30 +55,23 @@ public class UserService : IUserService
         return _mapper.Map<CreateUpdateUserDtoResponse>(patchedUser);
     }
 
-    public async Task<bool> DeleteAsync(long id)
+    public async Task DeleteAsync(long id)
     {
         var existingUser = await _userRepository.ExistsAsync(id);
         
         if (!existingUser)
         {
-            return false;
+            throw new KeyNotFoundException();
         }
-        var result = await _userRepository.DeleteAsync(id);
-        
-        return true;
+        await _userRepository.DeleteAsync(id);
     }
     
     public async Task<List<UserDto>> GetAllAsync()
     {
         var usersEntities = await _userRepository.GetAllAsync();
-        var usersDtos = _mapper.Map<List<UserDto>>(usersEntities);
-
-        if (usersDtos != null)
-        {
-            Console.WriteLine($"User GetAllAsync Response {usersDtos.Count} users");
-        }
+        var usersDto = _mapper.Map<List<UserDto>>(usersEntities);
         
-        return usersDtos;
+        return usersDto;
     }
 
     public async Task<UserDto?> GetByIdAsync(long id)

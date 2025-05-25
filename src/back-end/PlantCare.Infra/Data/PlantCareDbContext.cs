@@ -1,14 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using PlantCare.Application.Context;
 using PlantCare.Domain.Entities;
 
 namespace PlantCare.Infra.Data;
 
-public class PlantCareDbContext(DbContextOptions<PlantCareDbContext> options) : DbContext(options), IPlantCareDbContext
+public class PlantCareDbContext(DbContextOptions<PlantCareDbContext> options) : DbContext(options)
 {
-
-    public DbSet<User> Users { get; set; }
-    public DbSet<Plant> Plants { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -50,8 +46,6 @@ public class PlantCareDbContext(DbContextOptions<PlantCareDbContext> options) : 
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .HasColumnName("username");
-            
-            entity.HasQueryFilter(e => e.Active);
         });
         
         modelBuilder.Entity<Plant>(entity =>
@@ -89,8 +83,6 @@ public class PlantCareDbContext(DbContextOptions<PlantCareDbContext> options) : 
             entity.HasOne(d => d.User).WithMany(p => p.Plants)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("plants_user_id_fkey");
-            
-            entity.HasQueryFilter(e => e.Active);
         });
         
         base.OnModelCreating(modelBuilder);

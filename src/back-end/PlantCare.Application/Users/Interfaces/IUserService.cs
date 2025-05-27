@@ -13,6 +13,5 @@ public interface IUserService
     Task<UserDto?> GetByIdAsync(long id);
     Task<bool> ExistsAsync(long id);
     Task<UserDto?> GetByUsername(string username);
-    Task<bool> DoesEmailExist(string email);
-    Task<bool> DoesUsernameExist(string username);
+    Dictionary<string, bool> IsAvailable(string email, string username);
 }

@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.JavaScript;
 using Microsoft.EntityFrameworkCore;
 using PlantCare.Application.Users.Interfaces;
 using PlantCare.Domain.Entities;
@@ -17,18 +18,25 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         return user;
     }
     
-    public async Task<bool> DoesUsernameExist(string username)
+    public Dictionary<string, bool> IsAvailable(string? email, string? username)
     {
-        var result = await DbSet.AnyAsync(u => u.Username == username);
+        var query = DbSet
+            .Where(u => u.Email == email || u.Username == username)
+            .Select(u => new { u.Email, u.Username })
+            .ToList();
+        
+        var availability = new Dictionary<string, bool>();
 
-        return result;
+        if (email != null)
+        {
+            availability["Email"] = !query.Any(u => u.Email == email);
+        }
+
+        if (username != null)
+        {
+            availability["Username"] = !query.Any(u => u.Username == username);
+        }
+        
+        return availability;
     }
-
-    public async Task<bool> DoesEmailExist(string email)
-    {
-        var result = await DbSet.AnyAsync(u => u.Email == email);
-
-        return result;
-    }
-
 }

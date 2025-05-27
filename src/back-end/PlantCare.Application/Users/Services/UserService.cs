@@ -1,3 +1,4 @@
+using System.Data;
 using AutoMapper;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.DTOs;
@@ -23,6 +24,18 @@ public class UserService : IUserService
 
     public async Task<CreateUpdateUserDtoResponse> CreateAsync(CreateUserRequest req)
     {   
+        var availability = _userRepository.IsAvailable(req.Email, req.Username);
+
+        if (availability["Email"] == false)
+        {
+            throw new ConstraintException("Email is already in use.");
+        }
+        
+        if (availability["Username"] == false)
+        {
+            throw new ConstraintException("Username is already in use.");
+        }
+        
         var userEntity = _mapper.Map<User>(req);
         
         userEntity.PasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(req.Password, BcryptWorkFactor);
@@ -36,6 +49,16 @@ public class UserService : IUserService
 
     public async Task<CreateUpdateUserDtoResponse> UpdateAsync(UpdateUserRequest req)
     {
+        if (req.Email is not null && await _userRepository.IsEmailAvailable(req.Email))
+        {
+            throw new Exception("Email already exists");
+        }
+
+        if (req.Username is not null && await _userRepository.IsUsernameAvailable(req.Username))
+        {
+            throw new Exception("Username already exists");
+        }
+        
         var storedUser = await _userRepository.GetByIdAsync(req.Id);
 
         if (storedUser == null)
@@ -89,9 +112,7 @@ public class UserService : IUserService
         
         return userDto;
     }
-
     
-    public async Task<bool> DoesEmailExist(string email) => await _userRepository.DoesEmailExist(email);
-    public async Task<bool> DoesUsernameExist(string username) => await _userRepository.DoesUsernameExist(username);
     public async Task<bool> ExistsAsync(long id) => await _userRepository.ExistsAsync(id);
+    public Dictionary<string, bool> IsAvailable(string email, string username) => _userRepository.IsAvailable(email, username);
 }

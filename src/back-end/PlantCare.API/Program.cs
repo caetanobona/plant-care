@@ -1,7 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using PlantCare.Application.Context;
 using PlantCare.Application.Mapping;
 using PlantCare.Application.Users.Interfaces;
 using PlantCare.Application.Users.Services;
@@ -35,7 +34,7 @@ builder.Services.AddScoped<UpdateUserRequestValidator>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddDbContext<IPlantCareDbContext, PlantCareDbContext>(options =>
+builder.Services.AddDbContext<PlantCareDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -48,7 +47,7 @@ app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<IPlantCareDbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
 
     if (!dbContext.Database.CanConnect())
     {

@@ -24,25 +24,5 @@ public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
         RuleFor(x => x.Password)
             .MinimumLength(8).WithMessage("Must be at least 8 characters")
             .MaximumLength(50).WithMessage("Password exceeds 50 characters");
-        
-        RuleFor(x => x.Email)
-            .MustAsync(async (
-                userModel, email, validationContext, cancellationToken
-            ) =>
-            {
-                var result = await userService.DoesEmailExist(email);
-                return !result;
-            })
-            .WithMessage("Email already exists");
-        
-        RuleFor(x => x.Username)
-            .MustAsync(async (
-                userModel, username, validationContext, cancellationToken
-            ) =>
-            {
-                var result = await userService.DoesUsernameExist(username);
-                return !result;
-            })
-            .WithMessage("Username already exists");
     }
 }

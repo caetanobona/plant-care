@@ -6,6 +6,5 @@ namespace PlantCare.Domain.Repositories;
 public interface IUserRepository : IBaseRepository<User>
 {
     Task<User?> GetByUsername(string username);
-    Task<bool> DoesUsernameExist(string username);
-    Task<bool> DoesEmailExist(string email);
+    Dictionary<string, bool> IsAvailable(string? email, string? username);
 }

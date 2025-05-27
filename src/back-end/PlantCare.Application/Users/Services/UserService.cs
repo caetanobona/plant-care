@@ -49,14 +49,16 @@ public class UserService : IUserService
 
     public async Task<CreateUpdateUserDtoResponse> UpdateAsync(UpdateUserRequest req)
     {
-        if (req.Email is not null && await _userRepository.IsEmailAvailable(req.Email))
+        var availability = _userRepository.IsAvailable(req.Email, req.Username);
+        
+        if (req.Email is not null && availability["Email"] == false)
         {
-            throw new Exception("Email already exists");
+            throw new ConstraintException("Email already exists");
         }
 
-        if (req.Username is not null && await _userRepository.IsUsernameAvailable(req.Username))
+        if (req.Username is not null && availability["Username"] == false)
         {
-            throw new Exception("Username already exists");
+            throw new ConstraintException("Username already exists");
         }
         
         var storedUser = await _userRepository.GetByIdAsync(req.Id);

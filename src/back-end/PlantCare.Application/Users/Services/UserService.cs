@@ -1,11 +1,14 @@
 using System.Data;
+using System.Runtime.InteropServices.JavaScript;
 using AutoMapper;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.DTOs;
 using PlantCare.Application.Users.Interfaces;
 using PlantCare.Application.Users.Models;
 using PlantCare.Domain.Entities;
+using PlantCare.Domain.Notification;
 using PlantCare.Domain.Repositories;
+using PlantCare.Domain.Result;
 
 namespace PlantCare.Application.Users.Services;
 
@@ -22,18 +25,24 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<CreateUpdateUserDtoResponse> CreateAsync(CreateUserRequest req)
-    {   
+    public async Task<Result<CreateUpdateUserDtoResponse>> CreateAsync(CreateUserRequest req)
+    {
+        var notification = new Notification();
         var availability = _userRepository.IsAvailable(req.Email, req.Username);
 
         if (availability["Email"] == false)
         {
-            throw new ConstraintException("Email is already in use.");
+            notification.AddError("Email is already in use.");
         }
         
         if (availability["Username"] == false)
         {
-            throw new ConstraintException("Username is already in use.");
+            notification.AddError("Username is already in use.");
+        }
+
+        if (notification.HasErrors)
+        {
+            return Result<CreateUpdateUserDtoResponse>.Failure(notification);
         }
         
         var userEntity = _mapper.Map<User>(req);
@@ -44,40 +53,47 @@ public class UserService : IUserService
         
         var createdUserDto = _mapper.Map<CreateUpdateUserDtoResponse>(createdUser);
         
-        return createdUserDto;
+        return Result<CreateUpdateUserDtoResponse>.Success(createdUserDto);
     }
 
-    public async Task<CreateUpdateUserDtoResponse> UpdateAsync(UpdateUserRequest req)
+    public async Task<Result<CreateUpdateUserDtoResponse>> UpdateAsync(UpdateUserRequest req)
     {
-        var availability = _userRepository.IsAvailable(req.Email, req.Username);
-        
-        if (req.Email is not null && availability["Email"] == false)
-        {
-            throw new ConstraintException("Email already exists");
-        }
-
-        if (req.Username is not null && availability["Username"] == false)
-        {
-            throw new ConstraintException("Username already exists");
-        }
+        var notification = new Notification();
         
         var storedUser = await _userRepository.GetByIdAsync(req.Id);
 
         if (storedUser == null)
         {
-            throw new EntryPointNotFoundException();
+            notification.AddError("User not found.");
+        }
+        
+        var availability = _userRepository.IsAvailable(req.Email, req.Username);
+        
+        if (req.Email is not null && availability["Email"] == false)
+        {
+            notification.AddError("Email is already in use.");
+        }
+
+        if (req.Username is not null && availability["Username"] == false)
+        {
+            notification.AddError("Username is already in use.");
+        }
+
+        if (notification.HasErrors)
+        {
+            return Result<CreateUpdateUserDtoResponse>.Failure(notification);
         }
         
         _mapper.Map(req, storedUser);
         
         if (!string.IsNullOrEmpty(req.Password))
         {
-            storedUser.PasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(req.Password, BcryptWorkFactor);
+            storedUser!.PasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(req.Password, BcryptWorkFactor);
         }
         
-        var patchedUser = await _userRepository.UpdateAsync(storedUser);
+        var patchedUser = await _userRepository.UpdateAsync(storedUser!);
         
-        return _mapper.Map<CreateUpdateUserDtoResponse>(patchedUser);
+        return Result<CreateUpdateUserDtoResponse>.Success(_mapper.Map<CreateUpdateUserDtoResponse>(patchedUser));
     }
 
     public async Task DeleteAsync(long id)
@@ -91,28 +107,28 @@ public class UserService : IUserService
         await _userRepository.DeleteAsync(id);
     }
     
-    public async Task<List<UserDto>> GetAllAsync()
+    public async Task<Result<List<UserDto>>> GetAllAsync()
     {
         var usersEntities = await _userRepository.GetAllAsync();
         var usersDto = _mapper.Map<List<UserDto>>(usersEntities);
         
-        return usersDto;
+        return Result<List<UserDto>>.Success(usersDto);
     }
 
-    public async Task<UserDto?> GetByIdAsync(long id)
+    public async Task<Result<UserDto>> GetByIdAsync(long id)
     {
         var userEntity = await _userRepository.GetByIdAsync(id);
         var userDto = _mapper.Map<UserDto>(userEntity);
         
-        return userDto;
+        return Result<UserDto>.Success(userDto);
     }
 
-    public async Task<UserDto?> GetByUsername(string username)
+    public async Task<Result<UserDto>> GetByUsername(string username)
     {
         var userEntity = await _userRepository.GetByUsername(username);
         var userDto = _mapper.Map<UserDto>(userEntity);
         
-        return userDto;
+        return Result<UserDto>.Success(userDto);
     }
     
     public async Task<bool> ExistsAsync(long id) => await _userRepository.ExistsAsync(id);

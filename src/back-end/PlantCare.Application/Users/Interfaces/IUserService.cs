@@ -9,7 +9,7 @@ public interface IUserService
 {
     Task<Result<CreateUpdateUserDtoResponse>> CreateAsync(CreateUserRequest req);
     Task<Result<CreateUpdateUserDtoResponse>> UpdateAsync(UpdateUserRequest req);
-    Task DeleteAsync(long id);
+    Task<Result> DeleteAsync(long id);
     Task<Result<List<UserDto>>> GetAllAsync();
     Task<Result<UserDto>> GetByIdAsync(long id);
     Task<bool> ExistsAsync(long id);

@@ -1,5 +1,3 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.Interfaces;
@@ -11,7 +9,7 @@ namespace Plantcare.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
-    {
+    {   
         private readonly IUserService _userService;
         private readonly CreateUserRequestValidator _createValidator;
         private readonly UpdateUserRequestValidator _updateValidator;
@@ -26,7 +24,12 @@ namespace Plantcare.API.Controllers
         [HttpDelete("{id:long}")]
         public async Task<IActionResult> DeleteAsync(long id)
         {
-            await _userService.DeleteAsync(id);
+            var result = await _userService.DeleteAsync(id);
+
+            if (result.IsFailure)
+            {
+                return BadRequest(result.Errors.ToList());
+            }
             
             return Ok();
         }
@@ -41,8 +44,14 @@ namespace Plantcare.API.Controllers
                 return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage).ToList());
             }
             
-            var createdUser = await _userService.CreateAsync(request);
-            return Ok(createdUser);
+            var result = await _userService.CreateAsync(request);
+
+            if (result.IsFailure)
+            {
+                return BadRequest(result.Errors.ToList());
+            }
+            
+            return Ok(result.Value);
         }
 
         [HttpPut]
@@ -55,42 +64,53 @@ namespace Plantcare.API.Controllers
                 return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage).ToList());
             }
             
-            var updatedUser = await _userService.UpdateAsync(request);
-            return Ok(updatedUser);
+            var result = await _userService.UpdateAsync(request);
+
+            if (result.IsFailure)
+            {
+                return BadRequest(result.Errors.ToList());
+            }
+            
+            return Ok(result.Value);
         }
         
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            Console.WriteLine("User GetAllAsync Request");
+            var result = await _userService.GetAllAsync();
+
+            if (result.Value is null)
+            {
+                return NotFound("No users found");
+            }
             
-            return Ok(await _userService.GetAllAsync());
+            return Ok(result.Value);
         }
         
         [HttpGet("{username}")]
         public async Task<IActionResult> GetByUsernameAsync(string username)
         {
-            var user = await _userService.GetByUsername(username);
+            var result = await _userService.GetByUsername(username);
 
-            if (user == null)
+            if (result.Value is null)
             {
-                return NotFound();
+                return NotFound("User not found");
             }
             
-            return Ok(user);
+            return Ok(result.Value);
         }
 
         [HttpGet("{id:long}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            var user = await _userService.GetByIdAsync(id);
+            var result = await _userService.GetByIdAsync(id);
 
-            if (user == null)
+            if (result.Value is null)
             {
-                return NotFound();
+                return NotFound("User not found");
             }
             
-            return Ok(user);
+            return Ok(result.Value);
         }
         
     }

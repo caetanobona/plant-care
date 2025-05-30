@@ -1,12 +1,9 @@
-using System.Data;
-using System.Runtime.InteropServices.JavaScript;
 using AutoMapper;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Users.DTOs;
 using PlantCare.Application.Users.Interfaces;
 using PlantCare.Application.Users.Models;
 using PlantCare.Domain.Entities;
-using PlantCare.Domain.Notification;
 using PlantCare.Domain.Repositories;
 using PlantCare.Domain.Result;
 
@@ -27,22 +24,22 @@ public class UserService : IUserService
 
     public async Task<Result<CreateUpdateUserDtoResponse>> CreateAsync(CreateUserRequest req)
     {
-        var notification = new Notification();
+        var errors = new List<string>();
         var availability = _userRepository.IsAvailable(req.Email, req.Username);
 
         if (availability["Email"] == false)
         {
-            notification.AddError("Email is already in use.");
+            errors.Add("Email is already in use.");
         }
         
         if (availability["Username"] == false)
         {
-            notification.AddError("Username is already in use.");
+            errors.Add("Username is already in use.");
         }
 
-        if (notification.HasErrors)
+        if (errors.Count > 0)
         {
-            return Result<CreateUpdateUserDtoResponse>.Failure(notification);
+            return Result<CreateUpdateUserDtoResponse>.Failure(errors);
         }
         
         var userEntity = _mapper.Map<User>(req);
@@ -58,30 +55,30 @@ public class UserService : IUserService
 
     public async Task<Result<CreateUpdateUserDtoResponse>> UpdateAsync(UpdateUserRequest req)
     {
-        var notification = new Notification();
+        var errors = new List<string>();
         
         var storedUser = await _userRepository.GetByIdAsync(req.Id);
 
         if (storedUser == null)
         {
-            notification.AddError("User not found.");
+            errors.Add("User not found");
         }
         
         var availability = _userRepository.IsAvailable(req.Email, req.Username);
         
         if (req.Email is not null && availability["Email"] == false)
         {
-            notification.AddError("Email is already in use.");
+            errors.Add("Email is already in use.");
         }
 
         if (req.Username is not null && availability["Username"] == false)
         {
-            notification.AddError("Username is already in use.");
+            errors.Add("Username is already in use.");
         }
 
-        if (notification.HasErrors)
+        if (errors.Count > 0)
         {
-            return Result<CreateUpdateUserDtoResponse>.Failure(notification);
+            return Result<CreateUpdateUserDtoResponse>.Failure(errors);
         }
         
         _mapper.Map(req, storedUser);
@@ -96,15 +93,17 @@ public class UserService : IUserService
         return Result<CreateUpdateUserDtoResponse>.Success(_mapper.Map<CreateUpdateUserDtoResponse>(patchedUser));
     }
 
-    public async Task DeleteAsync(long id)
+    public async Task<Result> DeleteAsync(long id)
     {
-        var existingUser = await _userRepository.ExistsAsync(id);
+        var existingUser = await _userRepository.GetByIdAsync(id);
         
-        if (!existingUser)
+        if (existingUser is null)
         {
-            throw new KeyNotFoundException();
+            return Result.Failure("User not found");
         }
-        await _userRepository.DeleteAsync(id);
+
+        await _userRepository.DeleteAsync(existingUser);
+        return Result.Success();
     }
     
     public async Task<Result<List<UserDto>>> GetAllAsync()
@@ -126,11 +125,11 @@ public class UserService : IUserService
     public async Task<Result<UserDto>> GetByUsername(string username)
     {
         var userEntity = await _userRepository.GetByUsername(username);
-        var userDto = _mapper.Map<UserDto>(userEntity);
         
+        var userDto = _mapper.Map<UserDto>(userEntity);
         return Result<UserDto>.Success(userDto);
     }
     
     public async Task<bool> ExistsAsync(long id) => await _userRepository.ExistsAsync(id);
-    public Dictionary<string, bool> IsAvailable(string email, string username) => _userRepository.IsAvailable(email, username);
+    public Dictionary<string, bool> IsAvailable(string? email, string? username) => _userRepository.IsAvailable(email, username);
 }

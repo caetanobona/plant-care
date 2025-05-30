@@ -8,7 +8,7 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 {
     Task<TEntity?> InsertAsync(TEntity obj);
     Task<TEntity?> UpdateAsync(TEntity obj);
-    Task DeleteAsync(long id);
+    Task DeleteAsync(TEntity obj);
     Task<List<TEntity>> GetAllAsync();
     Task<TEntity?> GetByIdAsync(long id);
     Task<bool> ExistsAsync(long id);

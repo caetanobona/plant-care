@@ -27,12 +27,12 @@ public class UserService : IUserService
         var errors = new List<string>();
         var availability = _userRepository.IsAvailable(req.Email, req.Username);
 
-        if (availability["Email"] == false)
+        if (!availability["Email"])
         {
             errors.Add("Email is already in use.");
         }
         
-        if (availability["Username"] == false)
+        if (!availability["Username"])
         {
             errors.Add("Username is already in use.");
         }
@@ -66,12 +66,12 @@ public class UserService : IUserService
         
         var availability = _userRepository.IsAvailable(req.Email, req.Username);
         
-        if (req.Email is not null && availability["Email"] == false)
+        if (req.Email is not null && !availability["Email"])
         {
             errors.Add("Email is already in use.");
         }
 
-        if (req.Username is not null && availability["Username"] == false)
+        if (req.Username is not null && !availability["Username"])
         {
             errors.Add("Username is already in use.");
         }

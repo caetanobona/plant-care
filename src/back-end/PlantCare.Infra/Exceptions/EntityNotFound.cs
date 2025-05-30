@@ -1,6 +1,6 @@
 namespace PlantCare.Infra.Exceptions;
 
-public class EntityNotFound : Exception
+public class EntityNotFoundException : Exception
 {
-    public EntityNotFound(string message) :  base(message) { }
+    public EntityNotFoundException(string message) :  base(message) { }
 }

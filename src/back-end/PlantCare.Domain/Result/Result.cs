@@ -9,7 +9,7 @@ public class Result
 
     protected Result(bool isSuccess, List<string>? errors, string? error = null)
     {
-        if (isSuccess && (errors is not null || errors is not null) || !isSuccess && (errors is null && error is null))
+        if (isSuccess && (errors is not null || error is not null) || !isSuccess && (errors is null && error is null))
         {
             throw new ArgumentException("Must be success without errors or have errors without success");
         }

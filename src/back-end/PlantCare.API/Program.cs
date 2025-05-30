@@ -49,7 +49,7 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<PlantCareDbContext>();
 
-    if (!dbContext.Database.CanConnect())
+    if (!await dbContext.Database.CanConnectAsync())
     {
         throw new NotImplementedException("Can't connect to database");
     }
@@ -62,6 +62,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.Run();
+await app.RunAsync();
 
 

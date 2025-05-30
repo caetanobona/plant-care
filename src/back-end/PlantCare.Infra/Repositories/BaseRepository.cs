@@ -34,17 +34,10 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
         return updatedEntity.Entity;
     }
     
-    public async Task DeleteAsync(long id)
+    public async Task DeleteAsync(TEntity obj)
     {
-        var entity = await DbSet.FindAsync(id);
-
-        if (entity == null)
-        {
-            throw new EntityNotFound($"{nameof(TEntity)} with {id} not found");
-        }
-            
-        entity.Active = false;
-        DbSet.Update(entity);
+        obj.Active = false;
+        DbSet.Update(obj);
         await DbContext.SaveChangesAsync();
     }
 

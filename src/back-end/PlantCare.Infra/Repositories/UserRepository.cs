@@ -11,7 +11,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
 {
     public UserRepository(PlantCareDbContext dbContext) : base(dbContext) { }
 
-    public async Task<User?> GetByUsername(string username)
+    public async Task<User?> GetByUsernameAsync(string username)
     {
         var user = await DbSet.FirstOrDefaultAsync(u => u.Username == username);
         

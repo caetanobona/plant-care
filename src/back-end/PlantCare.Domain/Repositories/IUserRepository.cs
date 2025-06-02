@@ -5,6 +5,6 @@ namespace PlantCare.Domain.Repositories;
 
 public interface IUserRepository : IBaseRepository<User>
 {
-    Task<User?> GetByUsername(string username);
+    Task<User?> GetByUsernameAsync(string username);
     Dictionary<string, bool> IsAvailable(string? email, string? username);
 }

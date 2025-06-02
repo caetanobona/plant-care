@@ -122,9 +122,9 @@ public class UserService : IUserService
         return Result<UserDto>.Success(userDto);
     }
 
-    public async Task<Result<UserDto>> GetByUsername(string username)
+    public async Task<Result<UserDto>> GetByUsernameAsync(string username)
     {
-        var userEntity = await _userRepository.GetByUsername(username);
+        var userEntity = await _userRepository.GetByUsernameAsync(username);
         
         var userDto = _mapper.Map<UserDto>(userEntity);
         return Result<UserDto>.Success(userDto);

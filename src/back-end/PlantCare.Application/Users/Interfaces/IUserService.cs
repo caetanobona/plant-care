@@ -13,6 +13,6 @@ public interface IUserService
     Task<Result<List<UserDto>>> GetAllAsync();
     Task<Result<UserDto>> GetByIdAsync(long id);
     Task<bool> ExistsAsync(long id);
-    Task<Result<UserDto>> GetByUsername(string username);
+    Task<Result<UserDto>> GetByUsernameAsync(string username);
     Dictionary<string, bool> IsAvailable(string email, string username);
 }

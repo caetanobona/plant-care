@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using PlantCare.Application.DTOs;
+using PlantCare.Application.Plants.Interfaces;
 using PlantCare.Application.Users.Interfaces;
+using PlantCare.Domain.Repositories;
 
 namespace Plantcare.API.Controllers;
 
@@ -7,9 +10,12 @@ namespace Plantcare.API.Controllers;
 [ApiController]
 public class PlantsController : ControllerBase
 {
+    private readonly IPlantsService _plantsService;
     
-    public PlantsController(IUserService userService)
+    public PlantsController(IPlantsService plantsService)
     {
+        _plantsService = plantsService;
         
     }
+    
 }

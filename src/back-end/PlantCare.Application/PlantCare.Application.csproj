@@ -21,8 +21,4 @@
       <ProjectReference Include="..\PlantCare.Domain\PlantCare.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Plants\Validators\" />
-    </ItemGroup>
-
 </Project>

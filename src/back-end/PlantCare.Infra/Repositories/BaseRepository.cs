@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using PlantCare.Domain.Entities;
 using PlantCare.Domain.Repositories;
 using PlantCare.Infra.Data;
-using PlantCare.Infra.Exceptions;
 
 namespace PlantCare.Infra.Repositories;
 

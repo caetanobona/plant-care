@@ -1,12 +1,11 @@
 using FluentValidation;
 using PlantCare.Application.DTOs;
-using PlantCare.Application.Users.Interfaces;
 
 namespace PlantCare.Application.Users.Validators;
 
 public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
 {
-    public CreateUserRequestValidator(IUserService userService)
+    public CreateUserRequestValidator()
     {
         RuleFor(x => x.Username)
             .NotEmpty().WithMessage("Username is required")

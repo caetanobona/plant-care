@@ -90,7 +90,7 @@ namespace Plantcare.API.Controllers
         [HttpGet("{username}")]
         public async Task<IActionResult> GetByUsernameAsync(string username)
         {
-            var result = await _userService.GetByUsername(username);
+            var result = await _userService.GetByUsernameAsync(username);
 
             if (result.Value is null)
             {

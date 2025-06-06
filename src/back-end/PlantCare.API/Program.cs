@@ -34,9 +34,15 @@ builder.Services.AddScoped<UpdateUserRequestValidator>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+Console.WriteLine("Enter the db password");
+var dbPassword = Console.ReadLine();
+
+var dbConnectionString = $"{builder.Configuration.GetConnectionString("EnterPasswordConnection")}{dbPassword}";
+Console.WriteLine(dbConnectionString);
+
 builder.Services.AddDbContext<PlantCareDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(dbConnectionString);
 });
 
 var app = builder.Build();

@@ -1,13 +1,11 @@
 using FluentValidation;
-using PlantCare.Application.DTOs;
-using PlantCare.Application.Users.Interfaces;
 using PlantCare.Application.Users.Models;
 
 namespace PlantCare.Application.Users.Validators;
 
 public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
 {
-    public UpdateUserRequestValidator(IUserService userService)
+    public UpdateUserRequestValidator()
     {
         RuleFor(x => x.Username)
             .MinimumLength(3).WithMessage("Must be at least 3 characters")

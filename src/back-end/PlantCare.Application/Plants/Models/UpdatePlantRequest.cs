@@ -2,10 +2,12 @@ namespace PlantCare.Application.Plants.Models;
 
 public class UpdatePlantRequest
 {
-    public string? UserId { get; set; }
+    public long Id { get; set; }
+    public long? UserId { get; set; }
     public string? Name { get; set; }
     public string? Species { get; set; }
     public string? ImageUrl { get; set; }
     public TimeSpan? WateringInterval { get; set; }
+    public DateTime? LastWatered { get; set; }
     public string? LightRequirements { get; set; }
 }

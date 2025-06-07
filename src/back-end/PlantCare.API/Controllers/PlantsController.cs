@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using PlantCare.Application.DTOs;
+using PlantCare.Application.Plants.DTOs;
 using PlantCare.Application.Plants.Interfaces;
 using PlantCare.Application.Plants.Models;
 using PlantCare.Application.Plants.Validators;
@@ -15,11 +16,33 @@ public class PlantsController : ControllerBase
 {
     private readonly IPlantsService _plantsService;
     private readonly CreatePlantRequestValidator _createValidator;
+    private readonly UpdatePlantRequestValidator _updateValidator;
     
-    public PlantsController(IPlantsService plantsService, CreatePlantRequestValidator createValidator)
+    public PlantsController(IPlantsService plantsService, CreatePlantRequestValidator createValidator, UpdatePlantRequestValidator updateValidator)
     {
         _plantsService = plantsService;
         _createValidator = createValidator;
+        _updateValidator = updateValidator;
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateAsync([FromBody] UpdatePlantRequest plant)
+    {
+        var validation = await _updateValidator.ValidateAsync(plant);
+
+        if (!validation.IsValid)
+        {
+            return BadRequest(validation.Errors.Select(x => x.ErrorMessage).ToList());
+        }
+        
+        var result = await _plantsService.UpdateAsync(plant);
+
+        if (result.IsFailure)
+        {
+            return BadRequest(result.Errors.ToList());
+        }
+        
+        return Ok(result.Value);
     }
 
     [HttpDelete("{id}")]

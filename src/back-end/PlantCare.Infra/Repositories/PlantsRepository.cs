@@ -9,17 +9,11 @@ public class PlantsRepository : BaseRepository<Plant>, IPlantsRepository
 {
     public PlantsRepository(PlantCareDbContext dbContext) : base(dbContext) { }
 
-    public async Task<List<Plant>> GetAllByUserAsync(User user)
+    public async Task<List<Plant>> GetAllByUserAsync(long userId)
     {
-        var plants = await DbSet.Where(p => p.UserId == user.Id).ToListAsync();
+        var plants = await DbSet.Where(p => p.UserId == userId).ToListAsync();
         
         return plants;
     }
-
-    public async Task<Plant?> GetBySpeciesAsync(string species)
-    {
-        var plant = await DbSet.FirstOrDefaultAsync(x => x.Species == species);
-
-        return plant;
-    }
+    
 }

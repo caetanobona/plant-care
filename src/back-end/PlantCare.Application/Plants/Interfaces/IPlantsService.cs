@@ -12,5 +12,5 @@ public interface IPlantsService
     public Task<Result<CreateUpdatePlantResponse>> CreateAsync(CreatePlantRequest req);
     public Task<Result<CreateUpdatePlantResponse>> UpdateAsync(UpdatePlantRequest req);
     public Task<Result> DeleteAsync(long id);
-    public Task<Result<List<PlantDto>>> GetAllByUserAsync(User user);
+    public Task<Result<List<PlantDto>>> GetAllByUserAsync(long userId);
 }

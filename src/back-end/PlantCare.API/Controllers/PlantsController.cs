@@ -84,6 +84,19 @@ public class PlantsController : ControllerBase
         return Ok(result.Value);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAllByUserAsync([FromQuery] long userId)
+    {
+        var result = await _plantsService.GetAllByUserAsync(userId);
+
+        if (result.IsFailure)
+        {
+            return StatusCode(501, result.Errors.ToList());
+        }
+        
+        return Ok(result.Value);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateAsync(CreatePlantRequest req)
     {

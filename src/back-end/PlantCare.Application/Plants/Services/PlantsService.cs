@@ -138,8 +138,20 @@ public class PlantsService : IPlantsService
         return Result.Success();
     }
 
-    public Task<Result<List<PlantDto>>> GetAllByUserAsync(User user)
+    public async Task<Result<List<PlantDto>>> GetAllByUserAsync(long userId)
     {
-        throw new NotImplementedException();
+        var plants = await _plantsRepository.GetAllByUserAsync(userId);
+        
+        var plantsDtos = new List<PlantDto>(plants.Select(plant => new PlantDto
+        {
+            Name = plant.Name,
+            Species = plant.Species,
+            ImageUrl = plant.ImageUrl,
+            WateringInterval = plant.WateringInterval,
+            LastWatered = plant.LastWatered,
+            LightRequirements = plant.LightRequirements
+        }));
+        
+        return Result<List<PlantDto>>.Success(plantsDtos);
     }
 }

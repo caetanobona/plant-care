@@ -90,9 +90,18 @@ public class PlantsService : IPlantsService
         throw new NotImplementedException();
     }
 
-    public Task<Result> DeleteAsync(int id)
+    public async Task<Result> DeleteAsync(long id)
     {
-        throw new NotImplementedException();
+        var plant = await _plantsRepository.GetByIdAsync(id);
+
+        if (plant == null)
+        {
+            return Result.Failure("Could not find plant");
+        }
+        
+        await _plantsRepository.DeleteAsync(plant);
+        
+        return Result.Success();
     }
 
     public Task<Result<List<PlantDto>>> GetAllByUserAsync(User user)

@@ -22,8 +22,20 @@ public class PlantsController : ControllerBase
         _createValidator = createValidator;
     }
 
-    [HttpGet]
-    [Route("{id}")]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(long id)
+    {
+        var result = await _plantsService.DeleteAsync(id);
+
+        if (result.IsFailure)
+        {
+            return BadRequest(result.Errors.ToList());
+        }
+        
+        return NoContent();
+    }
+
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] long id)
     {
         var result = await _plantsService.GetByIdAsync(id);

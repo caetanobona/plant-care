@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Plants.Interfaces;
@@ -21,6 +22,33 @@ public class PlantsController : ControllerBase
         _createValidator = createValidator;
     }
 
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetByIdAsync([FromRoute] long id)
+    {
+        var result = await _plantsService.GetByIdAsync(id);
+        
+        if (result.IsFailure)
+        {
+            return StatusCode(501, result.Errors.ToList());
+        }
+        
+        return Ok(result.Value);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        var result = await _plantsService.GetAllAsync();
+
+        if (result.IsFailure)
+        {
+            return StatusCode(501, result.Errors.ToList());
+        }
+        
+        return Ok(result.Value);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateAsync(CreatePlantRequest req)
     {
@@ -38,7 +66,7 @@ public class PlantsController : ControllerBase
             return BadRequest(result.Errors.ToList());
         }
         
-        return Ok(result.Value);
+        return Ok(result.Value); // Change to Created(uri, result.Value)
     }
     
 }

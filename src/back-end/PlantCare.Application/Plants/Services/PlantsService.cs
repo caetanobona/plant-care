@@ -15,14 +15,42 @@ public class PlantsService : IPlantsService
     {
         _plantsRepository = plantsRepository;
     }
-    public Task<Result<List<PlantDto>>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task<Result<PlantDto>> GetByIdAsync(int id)
+    public async Task<Result<PlantDto?>> GetByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var entity = await _plantsRepository.GetByIdAsync(id);
+
+        if (entity == null)
+        {
+            return Result<PlantDto?>.Success(null);
+        }
+
+        var plantDto = new PlantDto{
+            Name = entity.Name,
+            Species = entity.Species,
+            ImageUrl = entity.ImageUrl,
+            WateringInterval = entity.WateringInterval,
+            LastWatered = entity.LastWatered,
+            LightRequirements = entity.LightRequirements
+        };
+        
+        return Result<PlantDto?>.Success(plantDto);
+    }
+    public async Task<Result<List<PlantDto>>> GetAllAsync()
+    {
+        var entities = await _plantsRepository.GetAllAsync();
+
+        var plants = entities.Select(entity => new PlantDto
+        {
+            Name = entity.Name,
+            Species = entity.Species,
+            ImageUrl = entity.ImageUrl,
+            WateringInterval = entity.WateringInterval,
+            LastWatered = entity.LastWatered,
+            LightRequirements = entity.LightRequirements
+        }).ToList();
+        
+        return Result<List<PlantDto>>.Success(plants);
     }
 
     public async Task<Result<CreateUpdatePlantResponse>> CreateAsync(CreatePlantRequest req)

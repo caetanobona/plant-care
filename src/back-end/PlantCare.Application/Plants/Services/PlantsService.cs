@@ -82,12 +82,46 @@ public class PlantsService : IPlantsService
             LightRequirements =  entity.LightRequirements,
         };
         
+        
         return  Result<CreateUpdatePlantResponse>.Success(response);
     }
 
-    public Task<Result<CreateUpdatePlantResponse>> UpdateAsync(UpdatePlantRequest req)
+    public async Task<Result<CreateUpdatePlantResponse>> UpdateAsync(UpdatePlantRequest req)
     {
-        throw new NotImplementedException();
+        var plant = await _plantsRepository.GetByIdAsync(req.Id);
+
+        if (plant == null)
+        {
+            return Result<CreateUpdatePlantResponse>.Failure("Could not find plant with the provided Id");
+        }
+
+        var updatedPlant = new Plant
+        {
+            Name = req.Name ?? plant.Name,
+            Species = req.Species ?? plant.Species,
+            ImageUrl = req.ImageUrl ?? plant.ImageUrl,
+            WateringInterval = req.WateringInterval ?? plant.WateringInterval,
+            LastWatered = req.LastWatered ?? plant.LastWatered,
+        };
+        
+        var updatedEntity = await _plantsRepository.UpdateAsync(updatedPlant);
+
+        if (updatedEntity == null)
+        {
+            return Result<CreateUpdatePlantResponse>.Failure("Could not update plant");
+        }
+        
+        var response = new CreateUpdatePlantResponse
+        {
+           Name = updatedEntity.Name,
+           Species = updatedEntity.Species,
+           ImageUrl = updatedEntity.ImageUrl,
+           WateringInterval = updatedEntity.WateringInterval,
+           LastWatered = updatedEntity.LastWatered,
+           LightRequirements = updatedEntity.LightRequirements,
+        };
+        
+        return Result<CreateUpdatePlantResponse>.Success(response);
     }
 
     public async Task<Result> DeleteAsync(long id)

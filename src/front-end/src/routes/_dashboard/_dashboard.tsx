@@ -10,9 +10,9 @@ export function RouteComponent() {
   return (
     <div className='flex w-full h-full'>
       <SidebarProvider>
-      <DashboardSidebar />
+        <DashboardSidebar />
         <div className="mx-auto flex-1 max-w-screen-2xl h-full">
-          <main className='h-full flex flex-col'>
+          <main className='h-full flex flex-col p-6 md:p-8'>
             <Outlet />
           </main>
         </div>

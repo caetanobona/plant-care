@@ -6,6 +6,9 @@ export const Route = createFileRoute('/_dashboard/_dashboard/')({
 
 function RouteComponent() {
   return (
-    <div>Hello "/_dashboard/_dashboard/"!</div>
+    <div className='text-start'>Welcome back,
+    Emma
+    
+    Your plants are doing well today!</div>
   ) 
 }

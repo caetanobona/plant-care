@@ -10,7 +10,6 @@ public class CreatePlantRequestValidator : AbstractValidator<CreatePlantRequest>
     {
         RuleFor(request => request.UserId)
             .NotNull().WithMessage("Plant must have an owner")
-            .IsInEnum().WithMessage("User id must be a number")
             .GreaterThan(0).WithMessage("User id must be a valid ID");
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required")
@@ -20,8 +19,8 @@ public class CreatePlantRequestValidator : AbstractValidator<CreatePlantRequest>
             .NotEmpty().WithMessage("Species is required")
             .MinimumLength(10).WithMessage("Species must be at least 10 characters")
             .MaximumLength(120).WithMessage("Species cannot exceed 100 characters");
-        RuleFor(x => x.ImageUrl)
-            .MaximumLength(255).WithMessage("ImageUrl cannot exceed 255 characters");
+        RuleFor(x => x.ImageHash)
+            .MaximumLength(64).WithMessage("ImageHash cannot exceed 64 characters");
         RuleFor(x => x.WateringInterval)
             .NotNull().WithMessage("Plant must have a watering interval");
         RuleFor(x => x.LightRequirements)

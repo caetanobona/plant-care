@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace PlantCare.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class initMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,11 +40,11 @@ namespace PlantCare.Infra.Migrations
                     user_id = table.Column<long>(type: "bigint", nullable: false),
                     name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     species = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
-                    active = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
-                    image_url = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    image_hash = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
                     watering_interval = table.Column<TimeSpan>(type: "interval", nullable: false),
                     last_watered = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     light_requirements = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    active = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
                 },

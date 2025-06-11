@@ -8,15 +8,27 @@ public class UsersConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.HasKey(e => e.Id).HasName("users_pkey");
+        builder
+            .HasKey(e => e.Id)
+            .HasName("users_pkey");
 
         builder.ToTable("users");
+        
+        builder
+            .HasMany(e => e.Plants)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId);
 
-        builder.HasIndex(e => e.Email, "users_email_key").IsUnique();
+        builder.HasIndex(e => e.Email, "users_email_key")
+            .IsUnique();
 
-        builder.HasIndex(e => e.Username, "users_username_key").IsUnique();
+        builder.HasIndex(e => e.Username, "users_username_key")
+            .IsUnique();
 
-        builder.Property(e => e.Id).HasColumnName("id");
+        builder
+            .Property(e => e.Id)
+            .HasColumnName("id");
+        
         builder.Property(e => e.Active)
             .HasDefaultValue(true)
             .HasColumnName("active");

@@ -2,6 +2,9 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PlantCare.Application.Mapping;
+using PlantCare.Application.Plants.Interfaces;
+using PlantCare.Application.Plants.Services;
+using PlantCare.Application.Plants.Validators;
 using PlantCare.Application.Users.Interfaces;
 using PlantCare.Application.Users.Services;
 using PlantCare.Application.Users.Validators;
@@ -31,8 +34,14 @@ builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddScoped<CreateUserRequestValidator>();
 builder.Services.AddScoped<UpdateUserRequestValidator>();
 
+builder.Services.AddScoped<CreatePlantRequestValidator>();
+builder.Services.AddScoped<UpdatePlantRequestValidator>();
+
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IPlantsService, PlantsService>();
+builder.Services.AddScoped<IPlantsRepository, PlantsRepository>();
 
 builder.Services.AddDbContext<PlantCareDbContext>(options =>
 {

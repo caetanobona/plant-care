@@ -84,8 +84,8 @@ public class PlantsController : ControllerBase
         return Ok(result.Value);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAllByUserAsync([FromQuery] long userId)
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetAllByUserAsync([FromRoute] long userId)
     {
         var result = await _plantsService.GetAllByUserAsync(userId);
 

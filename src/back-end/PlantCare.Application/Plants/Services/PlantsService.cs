@@ -10,10 +10,12 @@ namespace PlantCare.Application.Plants.Services;
 public class PlantsService : IPlantsService
 {
     private readonly IPlantsRepository _plantsRepository;
+    private readonly IUserRepository _userRepository;
 
-    public PlantsService(IPlantsRepository plantsRepository)
+    public PlantsService(IPlantsRepository plantsRepository, IUserRepository userRepository)
     {
         _plantsRepository = plantsRepository;
+        _userRepository = userRepository;
     }
 
     public async Task<Result<PlantDto?>> GetByIdAsync(long id)
@@ -28,7 +30,7 @@ public class PlantsService : IPlantsService
         var plantDto = new PlantDto{
             Name = entity.Name,
             Species = entity.Species,
-            ImageUrl = entity.ImageUrl,
+            ImageHash = entity.ImageHash,
             WateringInterval = entity.WateringInterval,
             LastWatered = entity.LastWatered,
             LightRequirements = entity.LightRequirements
@@ -44,7 +46,7 @@ public class PlantsService : IPlantsService
         {
             Name = entity.Name,
             Species = entity.Species,
-            ImageUrl = entity.ImageUrl,
+            ImageHash = entity.ImageHash,
             WateringInterval = entity.WateringInterval,
             LastWatered = entity.LastWatered,
             LightRequirements = entity.LightRequirements
@@ -55,11 +57,18 @@ public class PlantsService : IPlantsService
 
     public async Task<Result<CreateUpdatePlantResponse>> CreateAsync(CreatePlantRequest req)
     {
+        var ownerExists = await _userRepository.ExistsAsync(req.UserId);
+
+        if (!ownerExists)
+        {
+            return Result<CreateUpdatePlantResponse>.Failure("UserId does not exist");
+        }
+        
         var plant = new Plant {
             UserId = req.UserId,
             Name = req.Name,
-            Species = req.Species,
-            ImageUrl = req.ImageUrl,
+            Species = req.Species, 
+            ImageHash = req.ImageHash,
             WateringInterval = req.WateringInterval,
             LastWatered = req.LastWatered,
             LightRequirements = req.LightRequirements,
@@ -74,9 +83,11 @@ public class PlantsService : IPlantsService
         
         var response = new CreateUpdatePlantResponse
         {
+            Id = entity.Id,
+            UserId = entity.UserId,
             Name = entity.Name,
             Species =  entity.Species,
-            ImageUrl =  entity.ImageUrl,
+            ImageHash =  entity.ImageHash,
             WateringInterval = entity.WateringInterval,
             LastWatered =  entity.LastWatered,
             LightRequirements =  entity.LightRequirements,
@@ -88,23 +99,38 @@ public class PlantsService : IPlantsService
 
     public async Task<Result<CreateUpdatePlantResponse>> UpdateAsync(UpdatePlantRequest req)
     {
+        var errors = new List<string>();
         var plant = await _plantsRepository.GetByIdAsync(req.Id);
 
         if (plant == null)
         {
-            return Result<CreateUpdatePlantResponse>.Failure("Could not find plant with the provided Id");
+            errors.Add("Could not find plant with the provided Id");
         }
 
-        var updatedPlant = new Plant
+        if (req.UserId is not null)
         {
-            Name = req.Name ?? plant.Name,
-            Species = req.Species ?? plant.Species,
-            ImageUrl = req.ImageUrl ?? plant.ImageUrl,
-            WateringInterval = req.WateringInterval ?? plant.WateringInterval,
-            LastWatered = req.LastWatered ?? plant.LastWatered,
-        };
+            var ownerExists = await _userRepository.ExistsAsync(req.UserId.Value);
+
+            if (!ownerExists)
+            {
+                errors.Add("UserId does not exist");
+            }
+        }
+
+        if (errors.Count > 0)
+        {
+            return Result<CreateUpdatePlantResponse>.Failure(errors);
+        }
+
+        plant!.Id = req.Id;
+        plant.UserId = req.UserId ?? plant.UserId;
+        plant.Name = req.Name ?? plant.Name;
+        plant.Species = req.Species ?? plant.Species;
+        plant.ImageHash = req.ImageHash ?? plant.ImageHash;
+        plant.WateringInterval = req.WateringInterval ?? plant.WateringInterval;
+        plant.LastWatered = req.LastWatered ?? plant.LastWatered;
         
-        var updatedEntity = await _plantsRepository.UpdateAsync(updatedPlant);
+        var updatedEntity = await _plantsRepository.UpdateAsync(plant);
 
         if (updatedEntity == null)
         {
@@ -112,10 +138,12 @@ public class PlantsService : IPlantsService
         }
         
         var response = new CreateUpdatePlantResponse
-        {
+        { 
+            Id = updatedEntity.Id, 
+            UserId = updatedEntity.UserId,
            Name = updatedEntity.Name,
            Species = updatedEntity.Species,
-           ImageUrl = updatedEntity.ImageUrl,
+           ImageHash = updatedEntity.ImageHash,
            WateringInterval = updatedEntity.WateringInterval,
            LastWatered = updatedEntity.LastWatered,
            LightRequirements = updatedEntity.LightRequirements,
@@ -146,7 +174,7 @@ public class PlantsService : IPlantsService
         {
             Name = plant.Name,
             Species = plant.Species,
-            ImageUrl = plant.ImageUrl,
+            ImageHash = plant.ImageHash,
             WateringInterval = plant.WateringInterval,
             LastWatered = plant.LastWatered,
             LightRequirements = plant.LightRequirements

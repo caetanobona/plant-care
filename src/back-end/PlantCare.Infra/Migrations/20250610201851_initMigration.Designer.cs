@@ -12,8 +12,8 @@ using PlantCare.Infra.Data;
 namespace PlantCare.Infra.Migrations
 {
     [DbContext(typeof(PlantCareDbContext))]
-    [Migration("20250521123804_AddActiveQueryFilter")]
-    partial class AddActiveQueryFilter
+    [Migration("20250610201851_initMigration")]
+    partial class initMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,11 +46,10 @@ namespace PlantCare.Infra.Migrations
                         .HasColumnName("created_at")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)")
-                        .HasColumnName("image_url");
+                    b.Property<string>("ImageHash")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("image_hash");
 
                     b.Property<DateTime?>("LastWatered")
                         .HasColumnType("timestamp with time zone")

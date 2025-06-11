@@ -2,6 +2,8 @@ namespace PlantCare.Application.Plants.DTOs;
 
 public class CreateUpdatePlantResponse
 {
+    public required long Id { get; set; }
+    public required long UserId { get; set; }
     public required string Name { get; set; }
     public required string Species  { get; set; }
     public string? ImageHash { get; set; }

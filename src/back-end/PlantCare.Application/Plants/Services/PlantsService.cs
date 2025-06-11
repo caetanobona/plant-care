@@ -28,7 +28,7 @@ public class PlantsService : IPlantsService
         var plantDto = new PlantDto{
             Name = entity.Name,
             Species = entity.Species,
-            ImageUrl = entity.ImageUrl,
+            ImageHash = entity.ImageHash,
             WateringInterval = entity.WateringInterval,
             LastWatered = entity.LastWatered,
             LightRequirements = entity.LightRequirements
@@ -44,7 +44,7 @@ public class PlantsService : IPlantsService
         {
             Name = entity.Name,
             Species = entity.Species,
-            ImageUrl = entity.ImageUrl,
+            ImageHash = entity.ImageHash,
             WateringInterval = entity.WateringInterval,
             LastWatered = entity.LastWatered,
             LightRequirements = entity.LightRequirements
@@ -58,8 +58,8 @@ public class PlantsService : IPlantsService
         var plant = new Plant {
             UserId = req.UserId,
             Name = req.Name,
-            Species = req.Species,
-            ImageUrl = req.ImageUrl,
+            Species = req.Species, 
+            ImageHash = req.ImageHash,
             WateringInterval = req.WateringInterval,
             LastWatered = req.LastWatered,
             LightRequirements = req.LightRequirements,
@@ -76,7 +76,7 @@ public class PlantsService : IPlantsService
         {
             Name = entity.Name,
             Species =  entity.Species,
-            ImageUrl =  entity.ImageUrl,
+            ImageHash =  entity.ImageHash,
             WateringInterval = entity.WateringInterval,
             LastWatered =  entity.LastWatered,
             LightRequirements =  entity.LightRequirements,
@@ -146,7 +146,7 @@ public class PlantsService : IPlantsService
         {
             Name = plant.Name,
             Species = plant.Species,
-            ImageUrl = plant.ImageUrl,
+            ImageHash = plant.ImageHash,
             WateringInterval = plant.WateringInterval,
             LastWatered = plant.LastWatered,
             LightRequirements = plant.LightRequirements

@@ -19,7 +19,8 @@ export const plantsApi = {
         validatedData
       );
 
-      const parsedResponse = plantResponseSchema.parse(response);
+      const parsedResponse = plantResponseSchema.parse(response.data);
+
       return parsedResponse;
     } catch (error) {
       if (error instanceof z.ZodError) {

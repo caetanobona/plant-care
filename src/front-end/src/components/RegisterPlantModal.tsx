@@ -1,18 +1,16 @@
-import axios from "axios";
+
 import { PlusCircle, Upload, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "./ui/input-otp";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 
-interface RegisterPlantModalProps {
-  open: boolean,
-  onOpenChange: (open: boolean) => void
-}
+// interface RegisterPlantModalProps {
+//   open: boolean,
+//   onOpenChange: (open: boolean) => void
+// }
 
 const RegisterPlantModal = () => {
   const [formData, setFormData] = useState({
@@ -52,13 +50,13 @@ const RegisterPlantModal = () => {
 
   const [wateringInterval, setWateringInterval] = useState<string>("")
 
-  const formatWateringInterval = (value : string) => {
-    return `${value[0]}${value[1]}:${value[2]}${value[3]}:${value[4]}${value[5]}` 
-  }
+  // const formatWateringInterval = (value : string) => {
+  //   return `${value[0]}${value[1]}:${value[2]}${value[3]}:${value[4]}${value[5]}` 
+  // }
 
   const handleFormSubmit = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    selectedImage
   }
 
   return ( 

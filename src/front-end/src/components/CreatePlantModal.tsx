@@ -1,19 +1,14 @@
-import { Divide, PlusCircle, Upload, X } from "lucide-react";
+import { PlusCircle, Upload, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
-import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "./ui/input-otp";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { z } from "zod";
-import {
-  CreatePlantRequest,
-  createPlantSchema,
-  PlantResponse,
-} from "@/features/plants/schemas";
+import { createPlantSchema } from "@/features/plants/schemas";
 import { plantsApi } from "@/features/plants/api/plants";
 
 // interface RegisterPlantModalProps {
@@ -51,21 +46,19 @@ const CreatePlantModal = () => {
     }
   };
 
-  const [wateringInterval, setWateringInterval] = useState<string>("");
-
   const formatWateringInterval = (value: string) => {
     return `${value[0]}${value[1]}:${value[2]}${value[3]}:${value[4]}${value[5]}`;
   };
 
-  const mutation = useMutation<PlantResponse, Error, CreatePlantRequest>({
+  const mutation = useMutation({
     mutationFn: plantsApi.create,
   });
 
   const onSubmit = (values: z.infer<typeof createPlantSchema>) => {
     const finalValues = {
       ...values,
-      userId: 1,
-      imageHash: values.image ?? "",
+      wateringInterval: formatWateringInterval(values.wateringInterval),
+      userId: 1
     };
 
     console.log(finalValues);
@@ -84,7 +77,7 @@ const CreatePlantModal = () => {
       <DialogContent>
         <DialogTitle>Register your plant</DialogTitle>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form onSubmit={form.handleSubmit(onSubmit)} action="">
             <div className="mt-2 space-y-6">
               <FormField
                 control={form.control}

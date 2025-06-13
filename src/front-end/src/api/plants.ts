@@ -13,6 +13,11 @@ export const plantsApi = {
   create: async (form: CreatePlantRequest): Promise<PlantResponse> => {
     const validatedData = createPlantSchema.parse(form);
 
+    console.log(`Validated Data NAME: ${validatedData.name}`)
+    console.log(`Validated Data SPECIES: ${validatedData.species}`)
+    console.log(`Validated Data IMAGE: ${validatedData.image}`)
+    console.log(`Validated Data WATERING: ${validatedData.wateringInterval}`)
+
     try {
       const response = await axios.post(
         `${API_BASE_URL}/plants`,
@@ -20,6 +25,11 @@ export const plantsApi = {
       );
 
       const parsedResponse = plantResponseSchema.parse(response.data);
+
+      console.log(`parsed response NAME: ${parsedResponse.name}`)
+      console.log(`parsed response SPECIES: ${parsedResponse.species}`)
+      console.log(`parsed response IMAGE: ${parsedResponse.imageHash}`)
+      console.log(`parsed response WATERING: ${parsedResponse.wateringInterval}`)
 
       return parsedResponse;
     } catch (error) {

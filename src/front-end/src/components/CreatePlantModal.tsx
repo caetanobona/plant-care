@@ -19,7 +19,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createPlantSchema } from "@/features/plants/schemas";
 import { plantsApi } from "@/api/plants";
 
-const CreatePlantModal = () => {
+interface CreatePlantModalProps {
+  open : boolean
+  onOpenChange : (open: boolean) => void
+}
+
+const CreatePlantModal = ({ open, onOpenChange } : CreatePlantModalProps) => {
   const form = useForm<z.infer<typeof createPlantSchema>>({
     resolver: zodResolver(createPlantSchema),
     defaultValues: {
@@ -57,19 +62,25 @@ const CreatePlantModal = () => {
 
   const formatWateringInterval = (val : string):string => `${val[0]}${val[1]}:${val[2]}${val[3]}:${val[4]}${val[5]}`
 
-  const onSubmit = (values: z.infer<typeof createPlantSchema>) => {
+  const onSubmit = async (values: z.infer<typeof createPlantSchema>) => {
     const finalValues = {
       ...values,
       wateringInterval: formatWateringInterval(values.wateringInterval)
     };
 
     console.log(finalValues);
+    await mutation.mutate(finalValues);
 
-    mutation.mutate(finalValues);
+    onOpenChange(false);
   };
 
+  const onCancel = () => {
+    form.reset()
+    onOpenChange(false)
+  }
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger>
         <Button className="bg-green-600">
           <PlusCircle />
@@ -211,7 +222,7 @@ const CreatePlantModal = () => {
               />
             </div>
             <div className="w-full text-end space-x-2">
-              <Button variant="outline" type="reset">
+              <Button variant="outline" type="reset" onClick={onCancel}>
                 Cancel
               </Button>
               <Button type="submit" className="cursor-pointer">

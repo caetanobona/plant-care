@@ -3,7 +3,7 @@ import {
   createPlantSchema,
   PlantResponse,
   plantResponseSchema,
-} from "../schemas";
+} from "../features/plants/schemas";
 import axios from "axios";
 import { z } from "zod";
 

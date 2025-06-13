@@ -68,7 +68,7 @@ public class PlantsService : IPlantsService
             UserId = req.UserId,
             Name = req.Name,
             Species = req.Species, 
-            ImageHash = req.ImageHash,
+            ImageHash = req.ImageBytes,
             WateringInterval = req.WateringInterval,
             LastWatered = req.LastWatered,
             LightRequirements = req.LightRequirements,

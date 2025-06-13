@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "./ui/input-otp";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import {
@@ -36,20 +36,23 @@ const CreatePlantModal = ({ open, onOpenChange } : CreatePlantModalProps) => {
   });
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      form.setValue("image", file)
       const reader = new FileReader();
       reader.onloadend = () => {
-        form.setValue("image", reader.result as string);
-      };
+        setImagePreview(reader.result as string)
+      }
       reader.readAsDataURL(file);
     }
   };
 
   const removeImage = () => {
     form.setValue("image", null);
+    setImagePreview(null);
     const fileInput = document.getElementById("image") as HTMLInputElement;
     if (fileInput) {
       fileInput.value = "";
@@ -158,7 +161,7 @@ const CreatePlantModal = ({ open, onOpenChange } : CreatePlantModalProps) => {
                       ) : (
                         <div className="relative">
                           <img
-                            src={field.value}
+                            src={imagePreview!}
                             alt="Plant preview"
                             className="w-full h-32 object-cover rounded-lg border border-gray-200"
                           />

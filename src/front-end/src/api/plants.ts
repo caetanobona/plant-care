@@ -18,10 +18,24 @@ export const plantsApi = {
     console.log(`Validated Data IMAGE: ${validatedData.image}`)
     console.log(`Validated Data WATERING: ${validatedData.wateringInterval}`)
 
+    const formData = new FormData();
+    formData.append("userId", validatedData.userId.toString())
+    formData.append("name", validatedData.name)
+    formData.append("species", validatedData.species)
+    if(validatedData.image) {
+      formData.append("image", validatedData.image)
+    }
+    formData.append("wateringInterval", validatedData.wateringInterval)
+
     try {
       const response = await axios.post(
         `${API_BASE_URL}/plants`,
-        validatedData
+        formData,
+        {
+          headers: {  
+            "Content-Type": "multipart/form-data",  
+          },
+        }
       );
 
       const parsedResponse = plantResponseSchema.parse(response.data);

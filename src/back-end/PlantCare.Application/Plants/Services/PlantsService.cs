@@ -68,7 +68,7 @@ public class PlantsService : IPlantsService
             UserId = req.UserId,
             Name = req.Name,
             Species = req.Species, 
-            ImageHash = req.ImageBytes,
+            ImageHash = req.ImageBytes is not null ? Utils.Utils.GetSha256Hash(req.ImageBytes) : null,
             WateringInterval = req.WateringInterval,
             LastWatered = req.LastWatered,
             LightRequirements = req.LightRequirements,

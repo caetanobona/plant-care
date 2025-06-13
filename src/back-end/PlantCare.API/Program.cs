@@ -1,3 +1,4 @@
+using Amazon.S3;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -49,6 +50,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IPlantsService, PlantsService>();
 builder.Services.AddScoped<IPlantsRepository, PlantsRepository>();
+
+builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+builder.Services.AddAWSService<IAmazonS3>();
 
 builder.Services.AddDbContext<PlantCareDbContext>(options =>
 {

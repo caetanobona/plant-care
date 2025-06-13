@@ -13,9 +13,14 @@ public class PlantsService : IPlantsService
     private readonly IUserRepository _userRepository;
 
     public PlantsService(IPlantsRepository plantsRepository, IUserRepository userRepository)
+    private readonly IAmazonS3 _s3Client;
+    
+    private readonly string _plantImagesBucketName = "plantcare-images";
+
     {
         _plantsRepository = plantsRepository;
         _userRepository = userRepository;
+        _s3Client = s3Client;
     }
 
     public async Task<Result<PlantDto?>> GetByIdAsync(long id)

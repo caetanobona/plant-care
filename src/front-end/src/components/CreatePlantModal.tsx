@@ -6,22 +6,27 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "./ui/input-otp";
 import { useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
-import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
+import { z } from "zod/v4";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { createPlantSchema } from "@/features/plants/schemas";
-import { plantsApi } from "@/features/plants/api/plants";
-
-// interface RegisterPlantModalProps {
-//   open: boolean,
-//   onOpenChange: (open: boolean) => void
-// }
+import { plantsApi } from "@/api/plants";
 
 const CreatePlantModal = () => {
   const form = useForm<z.infer<typeof createPlantSchema>>({
+    resolver: zodResolver(createPlantSchema),
     defaultValues: {
+      userId: 1,
       name: "",
       species: "",
-      wateringInterval: "000000",
+      wateringInterval: "",
     },
   });
 
@@ -46,19 +51,16 @@ const CreatePlantModal = () => {
     }
   };
 
-  const formatWateringInterval = (value: string) => {
-    return `${value[0]}${value[1]}:${value[2]}${value[3]}:${value[4]}${value[5]}`;
-  };
-
   const mutation = useMutation({
     mutationFn: plantsApi.create,
   });
 
+  const formatWateringInterval = (val : string):string => `${val[0]}${val[1]}:${val[2]}${val[3]}:${val[4]}${val[5]}`
+
   const onSubmit = (values: z.infer<typeof createPlantSchema>) => {
     const finalValues = {
       ...values,
-      wateringInterval: formatWateringInterval(values.wateringInterval),
-      userId: 1
+      wateringInterval: formatWateringInterval(values.wateringInterval)
     };
 
     console.log(finalValues);
@@ -92,6 +94,7 @@ const CreatePlantModal = () => {
                         className="text-sm"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -108,6 +111,7 @@ const CreatePlantModal = () => {
                         className="text-sm"
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -201,6 +205,7 @@ const CreatePlantModal = () => {
                         </div>
                       </InputOTP>
                     </div>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -209,7 +214,9 @@ const CreatePlantModal = () => {
               <Button variant="outline" type="reset">
                 Cancel
               </Button>
-              <Button type="submit">Register</Button>
+              <Button type="submit" className="cursor-pointer">
+                Register
+              </Button>
             </div>
           </form>
         </Form>

@@ -4,7 +4,7 @@ export const createPlantSchema = z.object({
   userId: z.number().positive(),
   name: z.string().trim().min(3, "Minimum 3 characters required").max(50, "Maximum 50 characters"),
   species: z.string().trim().min(10, "Minimum 10 characters required").max(120, "Maximum 120 characters"),
-  image: z.string().nullable().optional(),
+  image: z.instanceof(File).nullable().optional(),
   wateringInterval: z.string().min(6, "Fill every value")
 })
 

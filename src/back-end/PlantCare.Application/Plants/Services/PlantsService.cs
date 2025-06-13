@@ -1,3 +1,5 @@
+using Amazon.S3;
+using Amazon.S3.Model;
 using PlantCare.Application.Plants.DTOs;
 using PlantCare.Application.Plants.Interfaces;
 using PlantCare.Application.Plants.Models;
@@ -11,11 +13,14 @@ public class PlantsService : IPlantsService
 {
     private readonly IPlantsRepository _plantsRepository;
     private readonly IUserRepository _userRepository;
-
-    public PlantsService(IPlantsRepository plantsRepository, IUserRepository userRepository)
+    private readonly IAmazonS3 _s3Client;
+    
+    private readonly string _plantImagesBucketName = "plantcare-images";
+    public PlantsService(IPlantsRepository plantsRepository, IUserRepository userRepository, IAmazonS3 s3Client)
     {
         _plantsRepository = plantsRepository;
         _userRepository = userRepository;
+        _s3Client = s3Client;
     }
 
     public async Task<Result<PlantDto?>> GetByIdAsync(long id)
@@ -68,11 +73,23 @@ public class PlantsService : IPlantsService
             UserId = req.UserId,
             Name = req.Name,
             Species = req.Species, 
-            ImageHash = req.ImageBytes is not null ? Utils.Utils.GetSha256Hash(req.ImageBytes) : null,
+            ImageHash = req.Image is not null ? Utils.Utils.GetSha256Hash(req.Image.FileName) : null,
             WateringInterval = req.WateringInterval,
             LastWatered = req.LastWatered,
             LightRequirements = req.LightRequirements,
         };
+
+        if (req.Image is not null)
+        {
+            var request = new PutObjectRequest()
+            {
+                BucketName = _plantImagesBucketName,
+                Key = plant.ImageHash,
+                InputStream = req.Image.OpenReadStream(),
+            };
+            
+            await _s3Client.PutObjectAsync(request);
+        }
         
         var entity = await _plantsRepository.InsertAsync(plant);
 

@@ -1,13 +1,11 @@
-using PlantCare.Application.Plants.Interfaces;
+namespace PlantCare.API.DTOs;
 
-namespace PlantCare.Application.Plants.Models;
-
-public class CreatePlantRequest
+public class CreatePlantDto
 {
     public required long UserId { get; set; }
     public required string Name { get; set; }
     public required string Species { get; set; }
-    public IUploadedFile? Image { get; set; }
+    public IFormFile? Image { get; set; }
     public required TimeSpan WateringInterval { get; set; }
     public DateTime? LastWatered { get; set; }
     public string? LightRequirements { get; set; }

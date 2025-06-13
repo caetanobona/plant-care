@@ -1,5 +1,8 @@
+using Amazon.S3;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using PlantCare.API.Adapters;
+using PlantCare.API.DTOs;
 using PlantCare.Application.DTOs;
 using PlantCare.Application.Plants.DTOs;
 using PlantCare.Application.Plants.Interfaces;
@@ -18,7 +21,7 @@ public class PlantsController : ControllerBase
     private readonly CreatePlantRequestValidator _createValidator;
     private readonly UpdatePlantRequestValidator _updateValidator;
     
-    public PlantsController(IPlantsService plantsService, CreatePlantRequestValidator createValidator, UpdatePlantRequestValidator updateValidator)
+    public PlantsController(IPlantsService plantsService, CreatePlantRequestValidator createValidator, UpdatePlantRequestValidator updateValidator, IAmazonS3 s3Client)
     {
         _plantsService = plantsService;
         _createValidator = createValidator;
@@ -98,16 +101,33 @@ public class PlantsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreatePlantRequest req)
+    public async Task<IActionResult> CreateAsync([FromForm] CreatePlantDto req)
     {
-        var validation = await _createValidator.ValidateAsync(req);
+        var createPlantRequest = new CreatePlantRequest
+        {
+            UserId = req.UserId,
+            Name = req.Name,
+            Species = req.Species,
+            Image = req.Image is not null ? new FormFileAdapter(req.Image) : null,
+            WateringInterval = req.WateringInterval,
+            LastWatered = req.LastWatered,
+            LightRequirements = req.LightRequirements
+        };
+
+        if (createPlantRequest.Image is not null)
+        {
+            Console.WriteLine(createPlantRequest.Image.FileName);
+        }
+       
+        
+        var validation = await _createValidator.ValidateAsync(createPlantRequest);
 
         if (!validation.IsValid)
         {
             return BadRequest(validation.Errors.Select(x => x.ErrorMessage));
         }
         
-        var result = await _plantsService.CreateAsync(req);
+        var result = await _plantsService.CreateAsync(createPlantRequest);
 
         if (result.IsFailure)
         {

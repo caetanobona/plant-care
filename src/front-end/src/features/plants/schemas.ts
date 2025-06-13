@@ -1,11 +1,11 @@
-import z from "zod";
+import z from "zod/v4";
 
 export const createPlantSchema = z.object({
   userId: z.number().positive(),
-  name: z.string().trim().min(1, "Required").max(50, "Maximum 50 characters"),
-  species: z.string().trim().min(10, "Minimum 10 characters required"),
-  image: z.string().base64url().nullable().optional(),
-  wateringInterval: z.string().length(8, `Must be in 00:00:00 format`)
+  name: z.string().trim().min(3, "Minimum 3 characters required").max(50, "Maximum 50 characters"),
+  species: z.string().trim().min(10, "Minimum 10 characters required").max(120, "Maximum 120 characters"),
+  image: z.string().nullable().optional(),
+  wateringInterval: z.string().min(6, "Fill every value")
 })
 
 export const plantResponseSchema = z.object({

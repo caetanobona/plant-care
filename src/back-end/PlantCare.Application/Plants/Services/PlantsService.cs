@@ -84,7 +84,7 @@ public class PlantsService : IPlantsService
             var request = new PutObjectRequest()
             {
                 BucketName = _plantImagesBucketName,
-                Key = plant.ImageHash,
+                Key = $"{plant.ImageHash}{Path.GetExtension(req.Image.FileName)}",
                 InputStream = req.Image.OpenReadStream(),
             };
             
